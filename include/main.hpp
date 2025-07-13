@@ -1,7 +1,7 @@
 #ifndef __MAIN_HPP__
 #define __MAIN_HPP__
 
-#include "PythonMPC_Tester.hpp"
+#include "Python_LTI_MPC_Tester.hpp"
 
 #include <sstream>
 #include <stdint.h>

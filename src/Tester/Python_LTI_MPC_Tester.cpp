@@ -1,4 +1,4 @@
-#include "PythonMPC_Tester.hpp"
+#include "Python_LTI_MPC_Tester.hpp"
 
 PythonMPC_Tester::PythonMPC_Tester() {
 
