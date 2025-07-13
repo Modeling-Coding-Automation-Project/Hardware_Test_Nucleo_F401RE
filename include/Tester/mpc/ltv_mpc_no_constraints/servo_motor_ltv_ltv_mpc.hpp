@@ -1,14 +1,15 @@
 #ifndef __SERVO_MOTOR_LTV_LTV_MPC_HPP__
 #define __SERVO_MOTOR_LTV_LTV_MPC_HPP__
 
-#include "servo_motor_ltv_ltv_mpc_lkf.hpp"
+#include "ltv_mpc_phi_f_updater.hpp"
+#include "mpc_state_space_updater.hpp"
 #include "servo_motor_ltv_ltv_mpc_F.hpp"
 #include "servo_motor_ltv_ltv_mpc_Phi.hpp"
-#include "servo_motor_ltv_ltv_mpc_solver_factor.hpp"
 #include "servo_motor_ltv_ltv_mpc_Weight_U_Nc.hpp"
+#include "servo_motor_ltv_ltv_mpc_lkf.hpp"
+#include "servo_motor_ltv_ltv_mpc_solver_factor.hpp"
 #include "servo_motor_ltv_parameters.hpp"
-#include "mpc_state_space_updater.hpp"
-#include "ltv_mpc_phi_f_updater.hpp"
+
 
 #include "python_mpc.hpp"
 
@@ -27,7 +28,8 @@ constexpr std::size_t OUTPUT_SIZE = servo_motor_ltv_ltv_mpc_lkf::OUTPUT_SIZE;
 
 constexpr std::size_t AUGMENTED_STATE_SIZE = STATE_SIZE + OUTPUT_SIZE;
 
-constexpr std::size_t NUMBER_OF_DELAY = servo_motor_ltv_ltv_mpc_lkf::NUMBER_OF_DELAY;
+constexpr std::size_t NUMBER_OF_DELAY =
+    servo_motor_ltv_ltv_mpc_lkf::NUMBER_OF_DELAY;
 
 using LKF_Type = servo_motor_ltv_ltv_mpc_lkf::type;
 
@@ -43,24 +45,24 @@ using Phi_Type = servo_motor_ltv_ltv_mpc_Phi::type;
 
 using SolverFactor_Type = servo_motor_ltv_ltv_mpc_solver_factor::type;
 
-using PredictionMatrices_Type = MPC_PredictionMatrices_Type<
-  F_Type, Phi_Type, NP, NC, INPUT_SIZE, AUGMENTED_STATE_SIZE, OUTPUT_SIZE>;
+using PredictionMatrices_Type =
+    MPC_PredictionMatrices_Type<F_Type, Phi_Type, NP, NC, INPUT_SIZE,
+                                AUGMENTED_STATE_SIZE, OUTPUT_SIZE>;
 
-using Ref_Type = DenseMatrix_Type<double, OUTPUT_SIZE, 1>;
+using Ref_Type = DenseMatrix_Type<float, OUTPUT_SIZE, 1>;
 
-using ReferenceTrajectory_Type = MPC_ReferenceTrajectory_Type<
-  Ref_Type, NP>;
+using ReferenceTrajectory_Type = MPC_ReferenceTrajectory_Type<Ref_Type, NP>;
 
 using Parameter_Type = servo_motor_ltv_parameters::Parameter;
 
 using Weight_U_Nc_Type = servo_motor_ltv_ltv_mpc_Weight_U_Nc::type;
 
 using EmbeddedIntegratorSateSpace_Type =
-  typename EmbeddedIntegratorTypes<A_Type, B_Type, C_Type>::StateSpace_Type;
+    typename EmbeddedIntegratorTypes<A_Type, B_Type, C_Type>::StateSpace_Type;
 
-using type = LTV_MPC_NoConstraints_Type<
-  LKF_Type, PredictionMatrices_Type, ReferenceTrajectory_Type,
-  Parameter_Type, SolverFactor_Type>;
+using type = LTV_MPC_NoConstraints_Type<LKF_Type, PredictionMatrices_Type,
+                                        ReferenceTrajectory_Type,
+                                        Parameter_Type, SolverFactor_Type>;
 
 inline auto make() -> type {
 
@@ -79,24 +81,24 @@ inline auto make() -> type {
   Weight_U_Nc_Type Weight_U_Nc = servo_motor_ltv_ltv_mpc_Weight_U_Nc::make();
 
   MPC_StateSpace_Updater_Function_Object<
-    Parameter_Type, typename LKF_Type::DiscreteStateSpace_Type>
-    MPC_StateSpace_Updater_Function =
-    mpc_state_space_updater::MPC_StateSpace_Updater::update<
-      Parameter_Type, typename LKF_Type::DiscreteStateSpace_Type>;
+      Parameter_Type, typename LKF_Type::DiscreteStateSpace_Type>
+      MPC_StateSpace_Updater_Function =
+          mpc_state_space_updater::MPC_StateSpace_Updater::update<
+              Parameter_Type, typename LKF_Type::DiscreteStateSpace_Type>;
 
-  LTV_MPC_Phi_F_Updater_Function_Object<
-    EmbeddedIntegratorSateSpace_Type, Parameter_Type, Phi_Type, F_Type>
-    LTV_MPC_Phi_F_Updater_Function =
-    ltv_mpc_phi_f_updater::LTV_MPC_Phi_F_Updater::update<
-      EmbeddedIntegratorSateSpace_Type, Parameter_Type, Phi_Type, F_Type>;
+  LTV_MPC_Phi_F_Updater_Function_Object<EmbeddedIntegratorSateSpace_Type,
+                                        Parameter_Type, Phi_Type, F_Type>
+      LTV_MPC_Phi_F_Updater_Function =
+          ltv_mpc_phi_f_updater::LTV_MPC_Phi_F_Updater::update<
+              EmbeddedIntegratorSateSpace_Type, Parameter_Type, Phi_Type,
+              F_Type>;
 
   auto ltv_mpc_nc = make_LTV_MPC_NoConstraints(
-    kalman_filter, prediction_matrices, reference_trajectory, solver_factor,
-    Weight_U_Nc, MPC_StateSpace_Updater_Function,
-    LTV_MPC_Phi_F_Updater_Function);
+      kalman_filter, prediction_matrices, reference_trajectory, solver_factor,
+      Weight_U_Nc, MPC_StateSpace_Updater_Function,
+      LTV_MPC_Phi_F_Updater_Function);
 
   return ltv_mpc_nc;
-
 }
 
 } // namespace servo_motor_ltv_ltv_mpc

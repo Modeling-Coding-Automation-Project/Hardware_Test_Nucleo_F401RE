@@ -5,16 +5,16 @@ namespace servo_motor_ltv_parameters {
 
 class Parameter {
 public:
-  double Lshaft = static_cast<double>(1.0);
-  double dshaft = static_cast<double>(0.02);
-  double shaftrho = static_cast<double>(7850.0);
-  double G = static_cast<double>(81500000000.0);
-  double Mmotor = static_cast<double>(100.0);
-  double Rmotor = static_cast<double>(0.1);
-  double Bmotor = static_cast<double>(0.1);
-  double R = static_cast<double>(20.0);
-  double Kt = static_cast<double>(10.0);
-  double Bload = static_cast<double>(25.0);
+  float Lshaft = static_cast<float>(1.0);
+  float dshaft = static_cast<float>(0.02);
+  float shaftrho = static_cast<float>(7850.0);
+  float G = static_cast<float>(81500000000.0);
+  float Mmotor = static_cast<float>(100.0);
+  float Rmotor = static_cast<float>(0.1);
+  float Bmotor = static_cast<float>(0.1);
+  float R = static_cast<float>(20.0);
+  float Kt = static_cast<float>(10.0);
+  float Bload = static_cast<float>(25.0);
 };
 
 using Parameter_Type = Parameter;
