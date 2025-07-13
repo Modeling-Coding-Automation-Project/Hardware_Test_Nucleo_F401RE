@@ -9,14 +9,14 @@ public:
                             float Mmotor, float Rmotor, float Bmotor, float R,
                             float Kt, float Bload) -> A_Updater_Output_Type {
 
-    return A_Updater::sympy_function(Mmotor, G, Bmotor, Bload, shaftrho, Lshaft,
-                                     Kt, dshaft, Rmotor, R);
+    return A_Updater::sympy_function(Bmotor, Lshaft, R, dshaft, Bload, shaftrho,
+                                     Kt, Mmotor, G, Rmotor);
   }
 
-  static inline auto sympy_function(float Mmotor, float G, float Bmotor,
-                                    float Bload, float shaftrho, float Lshaft,
-                                    float Kt, float dshaft, float Rmotor,
-                                    float R) -> A_Updater_Output_Type {
+  static inline auto sympy_function(float Bmotor, float Lshaft, float R,
+                                    float dshaft, float Bload, float shaftrho,
+                                    float Kt, float Mmotor, float G,
+                                    float Rmotor) -> A_Updater_Output_Type {
     A_Updater_Output_Type result;
 
     float x0 = Rmotor * Rmotor;
@@ -25,23 +25,23 @@ public:
 
     float x2 = dshaft * dshaft * dshaft * dshaft;
 
-    float x3 = static_cast<float>(0.098174770424681) * x2;
+    float x3 = 0.098174770424681 * x2;
 
     float x4 = Lshaft * shaftrho;
 
-    float x5 = 1 / (static_cast<float>(25.0) * x1 + x3 * x4);
+    float x5 = 1 / (25.0 * x1 + x3 * x4);
 
     float x6 = G / Lshaft;
 
     float x7 = x2 * x6;
 
-    float x8 = static_cast<float>(0.00490873852123405) * x7;
+    float x8 = 0.00490873852123405 * x7;
 
     float x9 = 1 / (Mmotor * x0);
 
     float x10 = x7 * x9;
 
-    float x11 = static_cast<float>(0.1) * x9;
+    float x11 = 0.1 * x9;
 
     result.template set<0, 0>(static_cast<float>(1));
     result.template set<0, 1>(static_cast<float>(0.05));
@@ -98,11 +98,11 @@ public:
     static_cast<void>(Bmotor);
     static_cast<void>(Bload);
 
-    return B_Updater::sympy_function(Rmotor, R, Kt, Mmotor);
+    return B_Updater::sympy_function(Mmotor, R, Rmotor, Kt);
   }
 
-  static inline auto sympy_function(float Rmotor, float R, float Kt,
-                                    float Mmotor) -> B_Updater_Output_Type {
+  static inline auto sympy_function(float Mmotor, float R, float Rmotor,
+                                    float Kt) -> B_Updater_Output_Type {
     B_Updater_Output_Type result;
 
     result.template set<0, 0>(static_cast<float>(0));
