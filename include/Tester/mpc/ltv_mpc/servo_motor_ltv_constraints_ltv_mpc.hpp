@@ -25,7 +25,7 @@ using namespace PythonNumpy;
 using namespace PythonControl;
 using namespace PythonMPC;
 
-constexpr std::size_t NP = 20;
+constexpr std::size_t NP = 32;
 constexpr std::size_t NC = 2;
 
 constexpr std::size_t INPUT_SIZE = servo_motor_ltv_constraints_ltv_mpc_lkf::INPUT_SIZE;

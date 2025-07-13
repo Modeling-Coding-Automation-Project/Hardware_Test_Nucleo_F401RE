@@ -8,11 +8,11 @@ class A_Updater {
 public:
 static inline auto update(double Lshaft, double dshaft, double shaftrho, double G, double Mmotor, double Rmotor, double Bmotor, double R, double Kt, double Bload) -> A_Updater_Output_Type {
 
-        return A_Updater::sympy_function(shaftrho, G, Mmotor, Lshaft, Kt, dshaft, R, Bmotor,
-    Rmotor, Bload);
+        return A_Updater::sympy_function(Rmotor, Lshaft, Bmotor, dshaft, R, shaftrho,
+    Mmotor, G, Bload, Kt);
 }
 
-static inline auto sympy_function(double shaftrho, double G, double Mmotor, double Lshaft, double Kt, double dshaft, double R, double Bmotor, double Rmotor, double Bload) -> A_Updater_Output_Type {
+static inline auto sympy_function(double Rmotor, double Lshaft, double Bmotor, double dshaft, double R, double shaftrho, double Mmotor, double G, double Bload, double Kt) -> A_Updater_Output_Type {
     A_Updater_Output_Type result;
 
     double x0 = Rmotor * Rmotor;
@@ -69,10 +69,10 @@ static_cast<void>(G);
 static_cast<void>(Bmotor);
 static_cast<void>(Bload);
 
-        return B_Updater::sympy_function(Kt, Rmotor, Mmotor, R);
+        return B_Updater::sympy_function(Mmotor, Rmotor, Kt, R);
 }
 
-static inline auto sympy_function(double Kt, double Rmotor, double Mmotor, double R) -> B_Updater_Output_Type {
+static inline auto sympy_function(double Mmotor, double Rmotor, double Kt, double R) -> B_Updater_Output_Type {
     B_Updater_Output_Type result;
 
         result.template set<0, 0>(static_cast<double>(0));
