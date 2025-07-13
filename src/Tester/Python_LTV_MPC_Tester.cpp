@@ -117,8 +117,6 @@ void Python_LTV_MPC_Tester::test_mpc(void) {
       time_start[sim_step] = micros(); // start measuring.
     }
 
-    time_start[sim_step] = micros(); // start measuring.
-
     U = this->_mpc.update_manipulation(ref, sys.get_Y());
 
     time_end[sim_step] = micros(); // end measuring.
