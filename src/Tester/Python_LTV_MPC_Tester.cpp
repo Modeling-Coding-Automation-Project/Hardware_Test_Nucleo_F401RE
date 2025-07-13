@@ -1,17 +1,16 @@
-#include "PythonMPC_Tester.hpp"
+#include "Python_LTV_MPC_Tester.hpp"
 
-PythonMPC_Tester::PythonMPC_Tester() {
+Python_LTV_MPC_Tester::Python_LTV_MPC_Tester() {
 
 #if LTI_MPC_USE_CONSTRAINTS == 0
-  this->_mpc = servo_motor_lti_mpc::make();
+  this->_mpc = servo_motor_ltv_ltv_mpc::make();
 #else
-  this->_mpc = servo_motor_constraints_lti_mpc::make();
 #endif // LTI_MPC_USE_CONSTRAINTS == 0
 }
 
-PythonMPC_Tester::~PythonMPC_Tester() {}
+Python_LTV_MPC_Tester::~Python_LTV_MPC_Tester() {}
 
-void PythonMPC_Tester::test_mpc(void) {
+void Python_LTV_MPC_Tester::test_mpc(void) {
 
   /* Define State Space */
   using A_Type = PythonNumpy::SparseAvailable<
@@ -54,37 +53,71 @@ void PythonMPC_Tester::test_mpc(void) {
 
   auto sys = PythonControl::make_DiscreteStateSpace(A, B, C, D, dt);
 
+  /* Define parameters */
+  servo_motor_ltv_parameters::Parameter plant_parameters;
+  servo_motor_ltv_parameters::Parameter controller_parameters;
+
   /* Define reference */
-  servo_motor_constraints_lti_mpc::Ref_Type ref;
+  servo_motor_ltv_ltv_mpc::Ref_Type ref;
 
   auto U = PythonControl::make_StateSpaceInput<INPUT_SIZE>(0.0F);
 
   /* State Space Simulation */
-  unsigned long time_start[PythonMPC_Tester::SIM_STEP_MAX] = {0};
-  unsigned long time_end[PythonMPC_Tester::SIM_STEP_MAX] = {0};
+  unsigned long time_start[Python_LTV_MPC_Tester::SIM_STEP_MAX] = {0};
+  unsigned long time_end[Python_LTV_MPC_Tester::SIM_STEP_MAX] = {0};
 
   std::array<PythonControl::StateSpaceOutput_Type<
-                 float, PythonMPC_Tester::OUTPUT_SIZE>,
-             PythonMPC_Tester::SIM_STEP_MAX>
+                 float, Python_LTV_MPC_Tester::OUTPUT_SIZE>,
+             Python_LTV_MPC_Tester::SIM_STEP_MAX>
       y_array;
-  std::array<
-      PythonControl::StateSpaceInput_Type<float, PythonMPC_Tester::INPUT_SIZE>,
-      PythonMPC_Tester::SIM_STEP_MAX>
+  std::array<PythonControl::StateSpaceInput_Type<
+                 float, Python_LTV_MPC_Tester::INPUT_SIZE>,
+             Python_LTV_MPC_Tester::SIM_STEP_MAX>
       u_array;
 
-  for (std::size_t sim_step = 0; sim_step < PythonMPC_Tester::SIM_STEP_MAX;
+  constexpr std::size_t PARAMETER_CHANGE_STEP = 0;
+  bool parameter_changed = false;
+  constexpr double MPC_UPDATE_STEP = 50;
+  bool MPC_updated = false;
+
+  /* Initialize reference */
+  for (std::size_t i = 0; i < ref.rows(); ++i) {
+    ref(0, i) = 1.0F;
+  }
+
+  for (std::size_t sim_step = 0; sim_step < Python_LTV_MPC_Tester::SIM_STEP_MAX;
        ++sim_step) {
+    if (!parameter_changed && sim_step >= PARAMETER_CHANGE_STEP) {
+      plant_parameters.Mmotor = 250.0;
+      mpc_state_space_updater::MPC_StateSpace_Updater::update(plant_parameters,
+                                                              sys);
+      parameter_changed = true;
+
+      for (std::size_t i = 0; i < ref.rows(); ++i) {
+        ref(0, i) = -1.0;
+      }
+    }
+
     /* system response */
     sys.update(U);
 
     /* controller */
-    for (std::size_t i = 0; i < ref.rows(); ++i) {
-      ref(0, i) = 1.0F;
+    if (!MPC_updated && sim_step >= MPC_UPDATE_STEP) {
+      controller_parameters.Mmotor = 250.0;
+
+      MPC_updated = true;
+
+      for (std::size_t i = 0; i < ref.rows(); ++i) {
+        ref(0, i) = 1.0;
+      }
+
+      time_start[sim_step] = micros(); // start measuring.
+      this->_mpc.update_parameters(controller_parameters);
+    } else {
+      time_start[sim_step] = micros(); // start measuring.
     }
 
-    time_start[sim_step] = micros(); // start measuring.
-
-    U = this->_mpc.update(ref, sys.get_Y());
+    U = this->_mpc.update_manipulation(ref, sys.get_Y());
 
     time_end[sim_step] = micros(); // end measuring.
 
@@ -104,7 +137,7 @@ void PythonMPC_Tester::test_mpc(void) {
 
   result_text += "Y[0], Y[1], U[0], Calculation time[us]\n";
 
-  for (std::size_t i = 0; i < PythonMPC_Tester::SIM_STEP_MAX; i++) {
+  for (std::size_t i = 0; i < Python_LTV_MPC_Tester::SIM_STEP_MAX; i++) {
     result_text += String(y_array[i](0, 0), 7);
     result_text += ", ";
     result_text += String(y_array[i](1, 0), 7);

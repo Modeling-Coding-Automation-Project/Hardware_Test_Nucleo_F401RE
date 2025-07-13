@@ -1,5 +1,5 @@
-#ifndef __PYTHON_MPC_TESTER_HPP__
-#define __PYTHON_MPC_TESTER_HPP__
+#ifndef __PYTHON_LTI_MPC_TESTER_HPP__
+#define __PYTHON_LTI_MPC_TESTER_HPP__
 
 #include "python_mpc.hpp"
 #include "servo_motor_constraints_lti_mpc.hpp"
@@ -15,7 +15,7 @@
 
 #define LTI_MPC_USE_CONSTRAINTS (1)
 
-class PythonMPC_Tester {
+class Python_LTI_MPC_Tester {
 public:
   /* Constant, Type */
   static constexpr std::size_t INPUT_SIZE =
@@ -35,10 +35,10 @@ public:
 
 public:
   /* Constructor */
-  PythonMPC_Tester();
+  Python_LTI_MPC_Tester();
 
   /* Destructor */
-  ~PythonMPC_Tester();
+  ~Python_LTI_MPC_Tester();
 
 public:
   /* Functions */
@@ -49,4 +49,4 @@ private:
   Tester_MPC_Type _mpc;
 };
 
-#endif // __PYTHON_MPC_TESTER_HPP__
+#endif // __PYTHON_LTI_MPC_TESTER_HPP__
