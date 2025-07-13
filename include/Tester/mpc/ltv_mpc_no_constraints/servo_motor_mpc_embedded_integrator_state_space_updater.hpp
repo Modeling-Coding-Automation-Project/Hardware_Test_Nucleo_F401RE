@@ -1,7 +1,7 @@
-#ifndef __MPC_EMBEDDED_INTEGRATOR_STATE_SPACE_UPDATER_HPP__
-#define __MPC_EMBEDDED_INTEGRATOR_STATE_SPACE_UPDATER_HPP__
+#ifndef __SERVO_MOTOR_MPC_EMBEDDED_INTEGRATOR_STATE_SPACE_UPDATER_HPP__
+#define __SERVO_MOTOR_MPC_EMBEDDED_INTEGRATOR_STATE_SPACE_UPDATER_HPP__
 
-namespace mpc_embedded_integrator_state_space_updater {
+namespace servo_motor_mpc_embedded_integrator_state_space_updater {
 
 template <typename A_Updater_Output_Type> class A_Updater {
 public:
@@ -194,6 +194,6 @@ public:
   }
 };
 
-} // namespace mpc_embedded_integrator_state_space_updater
+} // namespace servo_motor_mpc_embedded_integrator_state_space_updater
 
-#endif // __MPC_EMBEDDED_INTEGRATOR_STATE_SPACE_UPDATER_HPP__
+#endif // __SERVO_MOTOR_MPC_EMBEDDED_INTEGRATOR_STATE_SPACE_UPDATER_HPP__

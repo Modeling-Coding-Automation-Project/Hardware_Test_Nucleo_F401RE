@@ -89,8 +89,8 @@ void Python_LTV_MPC_Tester::test_mpc(void) {
        ++sim_step) {
     if (!parameter_changed && sim_step >= PARAMETER_CHANGE_STEP) {
       plant_parameters.Mmotor = 250.0;
-      mpc_state_space_updater::MPC_StateSpace_Updater::update(plant_parameters,
-                                                              sys);
+      servo_motor_mpc_state_space_updater::MPC_StateSpace_Updater::update(
+          plant_parameters, sys);
       parameter_changed = true;
 
       for (std::size_t i = 0; i < ref.rows(); ++i) {

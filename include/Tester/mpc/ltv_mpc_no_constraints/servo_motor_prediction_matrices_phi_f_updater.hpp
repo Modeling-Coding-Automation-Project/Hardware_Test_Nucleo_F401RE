@@ -1,7 +1,7 @@
-#ifndef __PREDICTION_MATRICES_PHI_F_UPDATER_HPP__
-#define __PREDICTION_MATRICES_PHI_F_UPDATER_HPP__
+#ifndef __SERVO_MOTOR_PREDICTION_MATRICES_PHI_F_UPDATER_HPP__
+#define __SERVO_MOTOR_PREDICTION_MATRICES_PHI_F_UPDATER_HPP__
 
-namespace prediction_matrices_phi_f_updater {
+namespace servo_motor_prediction_matrices_phi_f_updater {
 
 class PredictionMatricesPhiF_Updater {
 public:
@@ -586,6 +586,6 @@ public:
   }
 };
 
-} // namespace prediction_matrices_phi_f_updater
+} // namespace servo_motor_prediction_matrices_phi_f_updater
 
-#endif // __PREDICTION_MATRICES_PHI_F_UPDATER_HPP__
+#endif // __SERVO_MOTOR_PREDICTION_MATRICES_PHI_F_UPDATER_HPP__

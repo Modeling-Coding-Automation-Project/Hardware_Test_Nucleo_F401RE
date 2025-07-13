@@ -1,15 +1,14 @@
 #ifndef __SERVO_MOTOR_LTV_LTV_MPC_HPP__
 #define __SERVO_MOTOR_LTV_LTV_MPC_HPP__
 
-#include "ltv_mpc_phi_f_updater.hpp"
-#include "mpc_state_space_updater.hpp"
 #include "servo_motor_ltv_ltv_mpc_F.hpp"
 #include "servo_motor_ltv_ltv_mpc_Phi.hpp"
 #include "servo_motor_ltv_ltv_mpc_Weight_U_Nc.hpp"
 #include "servo_motor_ltv_ltv_mpc_lkf.hpp"
 #include "servo_motor_ltv_ltv_mpc_solver_factor.hpp"
+#include "servo_motor_ltv_mpc_phi_f_updater.hpp"
 #include "servo_motor_ltv_parameters.hpp"
-
+#include "servo_motor_mpc_state_space_updater.hpp"
 
 #include "python_mpc.hpp"
 
@@ -83,13 +82,13 @@ inline auto make() -> type {
   MPC_StateSpace_Updater_Function_Object<
       Parameter_Type, typename LKF_Type::DiscreteStateSpace_Type>
       MPC_StateSpace_Updater_Function =
-          mpc_state_space_updater::MPC_StateSpace_Updater::update<
+          servo_motor_mpc_state_space_updater::MPC_StateSpace_Updater::update<
               Parameter_Type, typename LKF_Type::DiscreteStateSpace_Type>;
 
   LTV_MPC_Phi_F_Updater_Function_Object<EmbeddedIntegratorSateSpace_Type,
                                         Parameter_Type, Phi_Type, F_Type>
       LTV_MPC_Phi_F_Updater_Function =
-          ltv_mpc_phi_f_updater::LTV_MPC_Phi_F_Updater::update<
+          servo_motor_ltv_mpc_phi_f_updater::LTV_MPC_Phi_F_Updater::update<
               EmbeddedIntegratorSateSpace_Type, Parameter_Type, Phi_Type,
               F_Type>;
 
