@@ -9,6 +9,6 @@
 
 #include <Arduino.h>
 
-PythonMPC_Tester python_mpc_tester;
+Python_LTI_MPC_Tester python_mpc_tester;
 
 #endif // __MAIN_HPP__
