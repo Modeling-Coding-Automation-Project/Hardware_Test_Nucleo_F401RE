@@ -69,9 +69,8 @@ using ReferenceTrajectory_Type = MPC_ReferenceTrajectory_Type<Ref_Type, NP>;
 
 using type =
     LTI_MPC_Type<LKF_Type, PredictionMatrices_Type, ReferenceTrajectory_Type,
-                 Weight_U_Nc_Type, Delta_U_Min_Type, Delta_U_Max_Type,
-                 U_Min_Type, U_Max_Type, Y_Min_Type, Y_Max_Type,
-                 SolverFactor_Type>;
+                 Delta_U_Min_Type, Delta_U_Max_Type, U_Min_Type, U_Max_Type,
+                 Y_Min_Type, Y_Max_Type, SolverFactor_Type>;
 
 inline auto make() -> type {
 
