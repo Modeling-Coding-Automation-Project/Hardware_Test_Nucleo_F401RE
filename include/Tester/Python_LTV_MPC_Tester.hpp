@@ -23,7 +23,7 @@ public:
   static constexpr std::size_t OUTPUT_SIZE =
       servo_motor_ltv_ltv_mpc::OUTPUT_SIZE;
 
-  static constexpr std::size_t SIM_STEP_MAX = 1200;
+  static constexpr std::size_t SIM_STEP_MAX = 100;
 
 #if LTI_MPC_USE_CONSTRAINTS == 0
   using Tester_MPC_Type = servo_motor_ltv_ltv_mpc::type;

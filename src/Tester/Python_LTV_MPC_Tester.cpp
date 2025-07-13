@@ -75,9 +75,9 @@ void Python_LTV_MPC_Tester::test_mpc(void) {
              Python_LTV_MPC_Tester::SIM_STEP_MAX>
       u_array;
 
-  constexpr std::size_t PARAMETER_CHANGE_STEP = 400;
+  constexpr std::size_t PARAMETER_CHANGE_STEP = 0;
   bool parameter_changed = false;
-  constexpr double MPC_UPDATE_STEP = 800;
+  constexpr double MPC_UPDATE_STEP = 50;
   bool MPC_updated = false;
 
   /* Initialize reference */
