@@ -1,27 +1,8 @@
 #include "Python_LTV_MPC_Tester.hpp"
 
-#if LTI_MPC_USE_CONSTRAINTS == 0
-
-using MPC_StateSpace_Updater =
-    servo_motor_mpc_state_space_updater::MPC_StateSpace_Updater;
-using Parameter_Type = servo_motor_ltv_parameters::Parameter;
-using Ref_Type = servo_motor_ltv_ltv_mpc::Ref_Type;
-
-#else
-
-using MPC_StateSpace_Updater =
-    servo_motor_ltv_constraints_mpc_state_space_updater::MPC_StateSpace_Updater;
-using Parameter_Type = servo_motor_ltv_constraints_parameters::Parameter;
-using Ref_Type = servo_motor_ltv_constraints_ltv_mpc::Ref_Type;
-
-#endif // LTI_MPC_USE_CONSTRAINTS == 0
-
 Python_LTV_MPC_Tester::Python_LTV_MPC_Tester() {
 
-#if LTI_MPC_USE_CONSTRAINTS == 0
-  this->_mpc = servo_motor_ltv_ltv_mpc::make();
-#else
-#endif // LTI_MPC_USE_CONSTRAINTS == 0
+  this->_mpc = ltv_mpc_namespace::make();
 }
 
 Python_LTV_MPC_Tester::~Python_LTV_MPC_Tester() {}
