@@ -1,7 +1,7 @@
-#ifndef __MPC_EMBEDDED_INTEGRATOR_STATE_SPACE_UPDATER_HPP__
-#define __MPC_EMBEDDED_INTEGRATOR_STATE_SPACE_UPDATER_HPP__
+#ifndef __SERVO_MOTOR_LTV_CONSTRAINTS_MPC_EMBEDDED_INTEGRATOR_STATE_SPACE_UPDATER_HPP__
+#define __SERVO_MOTOR_LTV_CONSTRAINTS_MPC_EMBEDDED_INTEGRATOR_STATE_SPACE_UPDATER_HPP__
 
-namespace mpc_embedded_integrator_state_space_updater {
+namespace servo_motor_ltv_constraints_mpc_embedded_integrator_state_space_updater {
 
 template <typename A_Updater_Output_Type> class A_Updater {
 public:
@@ -9,14 +9,14 @@ public:
                             float Mmotor, float Rmotor, float Bmotor, float R,
                             float Kt, float Bload) -> A_Updater_Output_Type {
 
-    return A_Updater::sympy_function(Bmotor, Lshaft, R, dshaft, Bload, shaftrho,
-                                     Kt, Mmotor, G, Rmotor);
+    return A_Updater::sympy_function(Rmotor, Lshaft, Bmotor, dshaft, R,
+                                     shaftrho, G, Mmotor, Bload, Kt);
   }
 
-  static inline auto sympy_function(float Bmotor, float Lshaft, float R,
-                                    float dshaft, float Bload, float shaftrho,
-                                    float Kt, float Mmotor, float G,
-                                    float Rmotor) -> A_Updater_Output_Type {
+  static inline auto sympy_function(float Rmotor, float Lshaft, float Bmotor,
+                                    float dshaft, float R, float shaftrho,
+                                    float G, float Mmotor, float Bload,
+                                    float Kt) -> A_Updater_Output_Type {
     A_Updater_Output_Type result;
 
     float x0 = Rmotor * Rmotor;
@@ -98,11 +98,11 @@ public:
     static_cast<void>(Bmotor);
     static_cast<void>(Bload);
 
-    return B_Updater::sympy_function(Mmotor, R, Rmotor, Kt);
+    return B_Updater::sympy_function(Mmotor, Rmotor, Kt, R);
   }
 
-  static inline auto sympy_function(float Mmotor, float R, float Rmotor,
-                                    float Kt) -> B_Updater_Output_Type {
+  static inline auto sympy_function(float Mmotor, float Rmotor, float Kt,
+                                    float R) -> B_Updater_Output_Type {
     B_Updater_Output_Type result;
 
     result.template set<0, 0>(static_cast<float>(0));
@@ -194,6 +194,7 @@ public:
   }
 };
 
-} // namespace mpc_embedded_integrator_state_space_updater
+} // namespace
+  // servo_motor_ltv_constraints_mpc_embedded_integrator_state_space_updater
 
-#endif // __MPC_EMBEDDED_INTEGRATOR_STATE_SPACE_UPDATER_HPP__
+#endif // __SERVO_MOTOR_LTV_CONSTRAINTS_MPC_EMBEDDED_INTEGRATOR_STATE_SPACE_UPDATER_HPP__
