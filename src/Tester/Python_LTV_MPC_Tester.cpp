@@ -5,12 +5,14 @@
 using MPC_StateSpace_Updater =
     servo_motor_mpc_state_space_updater::MPC_StateSpace_Updater;
 using Parameter_Type = servo_motor_ltv_parameters::Parameter;
+using Ref_Type = servo_motor_ltv_ltv_mpc::Ref_Type;
 
 #else
 
 using MPC_StateSpace_Updater =
     servo_motor_ltv_constraints_mpc_state_space_updater::MPC_StateSpace_Updater;
 using Parameter_Type = servo_motor_ltv_constraints_parameters::Parameter;
+using Ref_Type = servo_motor_ltv_constraints_ltv_mpc::Ref_Type;
 
 #endif // LTI_MPC_USE_CONSTRAINTS == 0
 
@@ -72,7 +74,7 @@ void Python_LTV_MPC_Tester::test_mpc(void) {
   Parameter_Type controller_parameters;
 
   /* Define reference */
-  servo_motor_ltv_ltv_mpc::Ref_Type ref;
+  Ref_Type ref;
 
   auto U = PythonControl::make_StateSpaceInput<INPUT_SIZE>(0.0F);
 
