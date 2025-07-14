@@ -2,6 +2,7 @@
 #define __PYTHON_LTV_MPC_TESTER_HPP__
 
 #include "python_mpc.hpp"
+#include "servo_motor_ltv_constraints_ltv_mpc.hpp"
 #include "servo_motor_ltv_ltv_mpc.hpp"
 #include "servo_motor_ltv_parameters.hpp"
 
@@ -13,7 +14,7 @@
 
 #include <Arduino.h>
 
-#define LTI_MPC_USE_CONSTRAINTS (0)
+#define LTI_MPC_USE_CONSTRAINTS (1)
 
 class Python_LTV_MPC_Tester {
 public:
@@ -28,6 +29,7 @@ public:
 #if LTI_MPC_USE_CONSTRAINTS == 0
   using Tester_MPC_Type = servo_motor_ltv_ltv_mpc::type;
 #else
+  using Tester_MPC_Type = servo_motor_ltv_constraints_ltv_mpc::type;
 #endif // LTI_MPC_USE_CONSTRAINTS == 0
 
 public:

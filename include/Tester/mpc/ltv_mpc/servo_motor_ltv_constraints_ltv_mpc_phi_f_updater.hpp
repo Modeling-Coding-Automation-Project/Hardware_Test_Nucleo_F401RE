@@ -11,17 +11,17 @@ using namespace servo_motor_ltv_constraints_prediction_matrices_phi_f_updater;
 
 class LTV_MPC_Phi_F_Updater {
 public:
-template <typename StateSpace_Type, typename Parameter_Type,
-  typename Phi_Type, typename F_Type>
-static inline void update(const Parameter_Type &parameter, Phi_Type& Phi, F_Type& F) {
+  template <typename StateSpace_Type, typename Parameter_Type,
+            typename Phi_Type, typename F_Type>
+  static inline void update(const Parameter_Type &parameter, Phi_Type &Phi,
+                            F_Type &F) {
 
-  StateSpace_Type state_space;
-  EmbeddedIntegrator_Updater::update(parameter, state_space);
+    StateSpace_Type state_space;
+    EmbeddedIntegrator_Updater::update(parameter, state_space);
 
-  PredictionMatricesPhiF_Updater::update(
-      state_space.A, state_space.B, state_space.C, Phi, F);
-
-}
+    PredictionMatricesPhiF_Updater::update(state_space.A, state_space.B,
+                                           state_space.C, Phi, F);
+  }
 };
 
 } // namespace servo_motor_ltv_constraints_ltv_mpc_phi_f_updater

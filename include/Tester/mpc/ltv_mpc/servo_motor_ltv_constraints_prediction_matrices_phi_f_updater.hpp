@@ -5,10 +5,10 @@ namespace servo_motor_ltv_constraints_prediction_matrices_phi_f_updater {
 
 class PredictionMatricesPhiF_Updater {
 public:
-template <typename A_Type, typename B_Type, typename C_Type,
-          typename Phi_Type, typename F_Type >
-static inline void update(const A_Type &A, const B_Type &B,
-          const C_Type &C, Phi_Type& Phi, F_Type& F) {
+  template <typename A_Type, typename B_Type, typename C_Type,
+            typename Phi_Type, typename F_Type>
+  static inline void update(const A_Type &A, const B_Type &B, const C_Type &C,
+                            Phi_Type &Phi, F_Type &F) {
     auto C_A_1 = C * A;
     auto C_A_2 = C_A_1 * A;
     auto C_A_3 = C_A_2 * A;
@@ -583,7 +583,7 @@ static inline void update(const A_Type &A, const B_Type &B,
     F.template set<63, 3>(C_A_32.template get<1, 3>());
     F.template set<63, 4>(C_A_32.template get<1, 4>());
     F.template set<63, 5>(C_A_32.template get<1, 5>());
-}
+  }
 };
 
 } // namespace servo_motor_ltv_constraints_prediction_matrices_phi_f_updater
