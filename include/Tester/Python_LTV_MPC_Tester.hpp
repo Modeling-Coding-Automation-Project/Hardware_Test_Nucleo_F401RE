@@ -14,9 +14,9 @@
 
 #include <Arduino.h>
 
-#define LTI_MPC_USE_CONSTRAINTS (1)
+#define LTV_MPC_USE_CONSTRAINTS (1)
 
-#if LTI_MPC_USE_CONSTRAINTS == 0
+#if LTV_MPC_USE_CONSTRAINTS == 0
 
 namespace ltv_mpc_namespace = servo_motor_ltv_ltv_mpc;
 using MPC_StateSpace_Updater =
@@ -34,7 +34,7 @@ using Parameter_Type = servo_motor_ltv_constraints_parameters::Parameter;
 using Ref_Type = servo_motor_ltv_constraints_ltv_mpc::Ref_Type;
 using Tester_MPC_Type = servo_motor_ltv_constraints_ltv_mpc::type;
 
-#endif // LTI_MPC_USE_CONSTRAINTS == 0
+#endif // LTV_MPC_USE_CONSTRAINTS == 0
 
 class Python_LTV_MPC_Tester {
 public:
