@@ -14,6 +14,14 @@
 class Python_Nonlinear_MPC_Tester {
 
 public:
+  /* Constructor */
+  Python_Nonlinear_MPC_Tester();
+
+  /* Destructor */
+  ~Python_Nonlinear_MPC_Tester();
+
+public:
+  /* Functions */
   void test_mpc(void);
 };
 
