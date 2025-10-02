@@ -14,6 +14,7 @@
 #include <stdint.h>
 
 #include <Arduino.h>
+#include <memory>
 
 #ifdef NP
 #undef NP
@@ -55,7 +56,7 @@ public:
 
 private:
   /* Variables */
-  Tester_MPC_Type _mpc;
+  std::unique_ptr<Tester_MPC_Type> _mpc;
 };
 
 #endif // __PYTHON_NONLINEAR_MPC_TESTER_HPP__

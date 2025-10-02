@@ -1,10 +1,11 @@
 #include "Python_Nonlinear_MPC_Tester.hpp"
 
 Python_Nonlinear_MPC_Tester::Python_Nonlinear_MPC_Tester() {
+  // Construct MPC uniquely to avoid copying and dangling references
+  this->_mpc =
+      std::make_unique<Tester_MPC_Type>(nonlinear_mpc_namespace::make());
 
-  this->_mpc = nonlinear_mpc_namespace::make();
-
-  this->_mpc.set_solver_max_iteration(5);
+  this->_mpc->set_solver_max_iteration(5);
 }
 
 Python_Nonlinear_MPC_Tester::~Python_Nonlinear_MPC_Tester() {}
@@ -13,8 +14,9 @@ void Python_Nonlinear_MPC_Tester::test_mpc(void) {
   /* Simulation Setting */
   constexpr double SIMULATION_TIME = 20.0;
   constexpr double DELTA_TIME = 0.1;
-  constexpr std::size_t MAX_STEP =
-      static_cast<std::size_t>(SIMULATION_TIME / DELTA_TIME) + 1;
+  //   constexpr std::size_t MAX_STEP =
+  //       static_cast<std::size_t>(SIMULATION_TIME / DELTA_TIME) + 1;
+  constexpr std::size_t MAX_STEP = 1;
 
   /* Define MPC */
   constexpr std::size_t STATE_SIZE = Python_Nonlinear_MPC_Tester::STATE_SIZE;
@@ -25,7 +27,7 @@ void Python_Nonlinear_MPC_Tester::test_mpc(void) {
 
   Parameter_Type parameters;
 
-  auto X_initial = this->_mpc.get_X();
+  auto X_initial = this->_mpc->get_X();
 
   PythonControl::StateSpaceState_Type<float, STATE_SIZE> X = X_initial;
   PythonControl::StateSpaceInput_Type<float, INPUT_SIZE> U;
@@ -67,11 +69,12 @@ void Python_Nonlinear_MPC_Tester::test_mpc(void) {
 
     time_start[sim_step] = micros(); // start measuring.
 
-    U = this->_mpc.update_manipulation(reference_trajectory, Y);
+    U = this->_mpc->update_manipulation(reference_trajectory, Y);
 
     time_end[sim_step] = micros(); // end measuring.
 
-    std::size_t solver_iteration = this->_mpc.get_solver_step_iterated_number();
+    std::size_t solver_iteration =
+        this->_mpc->get_solver_step_iterated_number();
 
     double yaw = 2.0 * std::atan2(Y(3, 0), Y(2, 0));
 
