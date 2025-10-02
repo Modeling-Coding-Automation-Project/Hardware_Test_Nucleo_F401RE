@@ -4,6 +4,7 @@
 #include "python_mpc.hpp"
 
 #include "kinematic_bicycle_model_nonlinear_mpc.hpp"
+#include "nonlinear_mpc_reference_path.hpp"
 
 #include <cmath>
 #include <cstring>
