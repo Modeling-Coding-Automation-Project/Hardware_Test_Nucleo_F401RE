@@ -30,8 +30,6 @@ void Python_Nonlinear_MPC_Tester::test_mpc(void) {
   PythonControl::StateSpaceState_Type<float, STATE_SIZE> X = X_initial;
   PythonControl::StateSpaceInput_Type<float, INPUT_SIZE> U;
   PythonControl::StateSpaceOutput_Type<float, OUTPUT_SIZE> Y;
-
-  Reference_Type reference;
   ReferenceTrajectory_Type reference_trajectory;
 
   /* Simulation */
@@ -51,9 +49,25 @@ void Python_Nonlinear_MPC_Tester::test_mpc(void) {
     Y = measurement_function::function(X, parameters);
 
     /* controller */
-    for (std::size_t i = 0; i < OUTPUT_SIZE; ++i) {
-      for (std::size_t j = 0; j < NP; ++j) {
+    for (std::size_t j = 0; j < NP; ++j) {
+      for (std::size_t i = 0; i < OUTPUT_SIZE; ++i) {
+
+        reference_trajectory(i, j) =
+            nonlinear_mpc_reference_path::reference_path_data[reference_index +
+                                                              i +
+                                                              j * OUTPUT_SIZE];
       }
     }
+    reference_index += OUTPUT_SIZE;
+
+    time_start[sim_step] = micros(); // start measuring.
+
+    U = this->_mpc.update_manipulation(reference_trajectory, Y);
+
+    time_end[sim_step] = micros(); // end measuring.
+
+    /* store result */
+    y_array[sim_step] = Y;
+    u_array[sim_step] = U;
   }
 }

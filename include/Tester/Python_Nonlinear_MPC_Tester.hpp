@@ -27,7 +27,6 @@ namespace measurement_function =
 
 using Parameter_Type =
     kinematic_bicycle_model_nonlinear_mpc_ekf_parameter::Parameter_Type;
-using Reference_Type = kinematic_bicycle_model_nonlinear_mpc::Reference_Type;
 using ReferenceTrajectory_Type =
     kinematic_bicycle_model_nonlinear_mpc::ReferenceTrajectory_Type;
 

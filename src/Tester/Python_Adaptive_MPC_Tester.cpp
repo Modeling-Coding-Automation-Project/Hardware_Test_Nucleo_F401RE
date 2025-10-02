@@ -102,8 +102,6 @@ void Python_Adaptive_MPC_Tester::test_mpc(void) {
   constexpr std::size_t INPUT_SIZE = ada_mpc_namespace::INPUT_SIZE;
   constexpr std::size_t OUTPUT_SIZE = ada_mpc_namespace::OUTPUT_SIZE;
 
-  auto ada_mpc_nc = ada_mpc_namespace::make();
-
   Parameter_Type parameters;
 
   StateSpaceState_Type<float, STATE_SIZE> X;
@@ -148,7 +146,7 @@ void Python_Adaptive_MPC_Tester::test_mpc(void) {
 
     time_start[sim_step] = micros(); // start measuring.
 
-    U = ada_mpc_nc.update_manipulation(ref, Y);
+    U = this->_mpc.update_manipulation(ref, Y);
 
     time_end[sim_step] = micros(); // end measuring.
 
