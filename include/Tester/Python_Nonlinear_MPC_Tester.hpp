@@ -11,6 +11,10 @@
 
 #include <Arduino.h>
 
-class Python_Nonlinear_MPC_Tester {};
+class Python_Nonlinear_MPC_Tester {
+
+public:
+  void test_mpc(void);
+};
 
 #endif // __PYTHON_NONLINEAR_MPC_TESTER_HPP__
