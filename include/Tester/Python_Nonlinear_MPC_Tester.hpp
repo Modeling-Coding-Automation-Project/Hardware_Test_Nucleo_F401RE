@@ -4,6 +4,7 @@
 #include "python_mpc.hpp"
 
 #include "kinematic_bicycle_model_nonlinear_mpc.hpp"
+#include "kinematic_bicycle_model_nonlinear_mpc_ekf_parameter.hpp"
 #include "nonlinear_mpc_reference_path.hpp"
 
 #include <cmath>
@@ -20,6 +21,8 @@ namespace state_function =
 namespace measurement_function =
     kinematic_bicycle_model_nonlinear_mpc_ekf_measurement_function;
 
+using Parameter_Type =
+    kinematic_bicycle_model_nonlinear_mpc_ekf_parameter::Parameter_Type;
 using Reference_Type = kinematic_bicycle_model_nonlinear_mpc::Reference_Type;
 using Tester_MPC_Type = kinematic_bicycle_model_nonlinear_mpc::type;
 
