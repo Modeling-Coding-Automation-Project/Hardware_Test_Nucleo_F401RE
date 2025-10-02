@@ -15,6 +15,10 @@
 
 #include <Arduino.h>
 
+#ifdef NP
+#undef NP
+#endif
+
 namespace nonlinear_mpc_namespace = kinematic_bicycle_model_nonlinear_mpc;
 namespace state_function =
     kinematic_bicycle_model_nonlinear_mpc_ekf_state_function;
@@ -36,6 +40,8 @@ public:
   static constexpr std::size_t STATE_SIZE = nonlinear_mpc_namespace::STATE_SIZE;
   static constexpr std::size_t OUTPUT_SIZE =
       nonlinear_mpc_namespace::OUTPUT_SIZE;
+
+  static constexpr std::size_t NP = nonlinear_mpc_namespace::NP;
 
 public:
   /* Constructor */

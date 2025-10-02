@@ -21,6 +21,8 @@ void Python_Nonlinear_MPC_Tester::test_mpc(void) {
   constexpr std::size_t INPUT_SIZE = Python_Nonlinear_MPC_Tester::INPUT_SIZE;
   constexpr std::size_t OUTPUT_SIZE = Python_Nonlinear_MPC_Tester::OUTPUT_SIZE;
 
+  constexpr std::size_t NP = Python_Nonlinear_MPC_Tester::NP;
+
   Parameter_Type parameters;
 
   auto X_initial = this->_mpc.get_X();
@@ -29,6 +31,7 @@ void Python_Nonlinear_MPC_Tester::test_mpc(void) {
   PythonControl::StateSpaceInput_Type<float, INPUT_SIZE> U;
   PythonControl::StateSpaceOutput_Type<float, OUTPUT_SIZE> Y;
 
+  Reference_Type reference;
   ReferenceTrajectory_Type reference_trajectory;
 
   /* Simulation */
@@ -39,4 +42,18 @@ void Python_Nonlinear_MPC_Tester::test_mpc(void) {
       y_array;
   std::array<PythonControl::StateSpaceInput_Type<float, INPUT_SIZE>, MAX_STEP>
       u_array;
+
+  std::size_t reference_index = 0;
+
+  for (std::size_t sim_step = 0; sim_step < MAX_STEP; ++sim_step) {
+    /* system response */
+    X = state_function::function(X, U, parameters);
+    Y = measurement_function::function(X, parameters);
+
+    /* controller */
+    for (std::size_t i = 0; i < OUTPUT_SIZE; ++i) {
+      for (std::size_t j = 0; j < NP; ++j) {
+      }
+    }
+  }
 }
