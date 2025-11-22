@@ -29,7 +29,7 @@ namespace measurement_function =
     two_wheel_vehicle_model_ada_mpc_ekf_measurement_function;
 
 using Parameter_Type = two_wheel_vehicle_model_ada_mpc_ekf_parameter::Parameter;
-using Ref_Type = two_wheel_vehicle_model_ada_mpc::Ref_Type;
+using Reference_Type = two_wheel_vehicle_model_ada_mpc::Reference_Type;
 using Tester_MPC_Type = two_wheel_vehicle_model_ada_mpc::type;
 
 #else
@@ -42,7 +42,8 @@ namespace measurement_function =
 
 using Parameter_Type =
     two_wheel_vehicle_model_constraints_ada_mpc_ekf_parameter::Parameter;
-using Ref_Type = two_wheel_vehicle_model_constraints_ada_mpc::Ref_Type;
+using Reference_Type =
+    two_wheel_vehicle_model_constraints_ada_mpc::Reference_Type;
 using Tester_MPC_Type = two_wheel_vehicle_model_constraints_ada_mpc::type;
 
 #endif // ADA_MPC_USE_CONSTRAINTS

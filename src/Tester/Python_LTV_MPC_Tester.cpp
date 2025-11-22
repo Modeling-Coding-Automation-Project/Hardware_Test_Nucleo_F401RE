@@ -55,7 +55,7 @@ void Python_LTV_MPC_Tester::test_mpc(void) {
   Parameter_Type controller_parameters;
 
   /* Define reference */
-  Ref_Type ref;
+  Reference_Type reference;
 
   auto U = PythonControl::make_StateSpaceInput<INPUT_SIZE>(0.0F);
 
@@ -78,8 +78,8 @@ void Python_LTV_MPC_Tester::test_mpc(void) {
   bool MPC_updated = false;
 
   /* Initialize reference */
-  for (std::size_t i = 0; i < ref.rows(); ++i) {
-    ref(0, i) = 1.0F;
+  for (std::size_t i = 0; i < reference.rows(); ++i) {
+    reference(0, i) = 1.0F;
   }
 
   for (std::size_t sim_step = 0; sim_step < Python_LTV_MPC_Tester::SIM_STEP_MAX;
@@ -89,8 +89,8 @@ void Python_LTV_MPC_Tester::test_mpc(void) {
       MPC_StateSpace_Updater::update(plant_parameters, sys);
       parameter_changed = true;
 
-      for (std::size_t i = 0; i < ref.rows(); ++i) {
-        ref(0, i) = -1.0;
+      for (std::size_t i = 0; i < reference.rows(); ++i) {
+        reference(0, i) = -1.0;
       }
     }
 
@@ -103,8 +103,8 @@ void Python_LTV_MPC_Tester::test_mpc(void) {
 
       MPC_updated = true;
 
-      for (std::size_t i = 0; i < ref.rows(); ++i) {
-        ref(0, i) = 1.0;
+      for (std::size_t i = 0; i < reference.rows(); ++i) {
+        reference(0, i) = 1.0;
       }
 
       time_start[sim_step] = micros(); // start measuring.
@@ -113,7 +113,7 @@ void Python_LTV_MPC_Tester::test_mpc(void) {
       time_start[sim_step] = micros(); // start measuring.
     }
 
-    U = this->_mpc.update_manipulation(ref, sys.get_Y());
+    U = this->_mpc.update_manipulation(reference, sys.get_Y());
 
     time_end[sim_step] = micros(); // end measuring.
 

@@ -22,7 +22,7 @@ namespace ltv_mpc_namespace = servo_motor_ltv_ltv_mpc;
 using MPC_StateSpace_Updater =
     servo_motor_mpc_state_space_updater::MPC_StateSpace_Updater;
 using Parameter_Type = servo_motor_ltv_parameters::Parameter;
-using Ref_Type = servo_motor_ltv_ltv_mpc::Ref_Type;
+using Reference_Type = servo_motor_ltv_ltv_mpc::Reference_Type;
 using Tester_MPC_Type = ltv_mpc_namespace::type;
 
 #else
@@ -31,7 +31,7 @@ namespace ltv_mpc_namespace = servo_motor_ltv_constraints_ltv_mpc;
 using MPC_StateSpace_Updater =
     servo_motor_ltv_constraints_mpc_state_space_updater::MPC_StateSpace_Updater;
 using Parameter_Type = servo_motor_ltv_constraints_parameters::Parameter;
-using Ref_Type = servo_motor_ltv_constraints_ltv_mpc::Ref_Type;
+using Reference_Type = servo_motor_ltv_constraints_ltv_mpc::Reference_Type;
 using Tester_MPC_Type = servo_motor_ltv_constraints_ltv_mpc::type;
 
 #endif // LTV_MPC_USE_CONSTRAINTS == 0

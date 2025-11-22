@@ -10,14 +10,12 @@
 #include "servo_motor_ltv_constraints_mpc_state_space_updater.hpp"
 #include "servo_motor_ltv_constraints_parameters.hpp"
 
-
 #include "servo_motor_ltv_constraints_U_max.hpp"
 #include "servo_motor_ltv_constraints_U_min.hpp"
 #include "servo_motor_ltv_constraints_Y_max.hpp"
 #include "servo_motor_ltv_constraints_Y_min.hpp"
 #include "servo_motor_ltv_constraints_delta_U_max.hpp"
 #include "servo_motor_ltv_constraints_delta_U_min.hpp"
-
 
 #include "python_mpc.hpp"
 
@@ -73,9 +71,10 @@ using PredictionMatrices_Type =
     MPC_PredictionMatrices_Type<F_Type, Phi_Type, NP, NC, INPUT_SIZE,
                                 AUGMENTED_STATE_SIZE, OUTPUT_SIZE>;
 
-using Ref_Type = DenseMatrix_Type<float, OUTPUT_SIZE, 1>;
+using Reference_Type = DenseMatrix_Type<float, OUTPUT_SIZE, 1>;
 
-using ReferenceTrajectory_Type = MPC_ReferenceTrajectory_Type<Ref_Type, NP>;
+using ReferenceTrajectory_Type =
+    MPC_ReferenceTrajectory_Type<Reference_Type, NP>;
 
 using Parameter_Type = servo_motor_ltv_constraints_parameters::Parameter;
 

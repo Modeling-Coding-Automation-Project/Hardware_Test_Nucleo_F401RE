@@ -16,66 +16,64 @@ ReferenceSequence create_reference(const std::vector<float> &time,
   const float vehicle_speed = 15.0F;
   const float curve_yaw_rate = PI_LOCAL / 5.0F;
   const float curve_timing = 2.0F;
-  const float yaw_ref = PI_LOCAL;
+  const float yaw_reference = PI_LOCAL;
 
   const size_t time_size = time.size();
 
-  ReferenceSequence ref;
-  ref.x_sequence.resize(time_size, 0.0F);
-  ref.y_sequence.resize(time_size, 0.0F);
-  ref.theta_sequence.resize(time_size, 0.0F);
-  ref.r_sequence.resize(time_size, 0.0F);
-  ref.V_sequence.resize(time_size, 0.0F);
+  ReferenceSequence reference;
+  reference.x_sequence.resize(time_size, 0.0F);
+  reference.y_sequence.resize(time_size, 0.0F);
+  reference.theta_sequence.resize(time_size, 0.0F);
+  reference.r_sequence.resize(time_size, 0.0F);
+  reference.V_sequence.resize(time_size, 0.0F);
 
   for (std::size_t i = 0; i < time_size; ++i) {
     if (time[i] < curve_timing) {
       if (i > 0) {
-        ref.x_sequence[i] = ref.x_sequence[i - 1] + vehicle_speed * delta_time;
+        reference.x_sequence[i] =
+            reference.x_sequence[i - 1] + vehicle_speed * delta_time;
       } else {
-        ref.x_sequence[i] = vehicle_speed * delta_time;
+        reference.x_sequence[i] = vehicle_speed * delta_time;
       }
-      ref.y_sequence[i] = 0.0F;
-      ref.theta_sequence[i] = 0.0F;
-      ref.r_sequence[i] = 0.0F;
-      ref.V_sequence[i] = vehicle_speed;
+      reference.y_sequence[i] = 0.0F;
+      reference.theta_sequence[i] = 0.0F;
+      reference.r_sequence[i] = 0.0F;
+      reference.V_sequence[i] = vehicle_speed;
 
     } else if (time[i] > curve_timing &&
-               (i == 0 || ref.theta_sequence[i - 1] < yaw_ref)) {
+               (i == 0 || reference.theta_sequence[i - 1] < yaw_reference)) {
 
-      float prev_theta = (i > 0) ? ref.theta_sequence[i - 1] : 0.0F;
-      float prev_x = (i > 0) ? ref.x_sequence[i - 1] : 0.0F;
-      float prev_y = (i > 0) ? ref.y_sequence[i - 1] : 0.0F;
-
-      ref.x_sequence[i] =
+      float prev_theta = (i > 0) ? reference.theta_sequence[i - 1] : 0.0F;
+      float prev_x = (i > 0) ? reference.x_sequence[i - 1] : 0.0F;
+      float prev_y = (i > 0) ? reference.y_sequence[i - 1] : 0.0F;
+      reference.x_sequence[i] =
           prev_x + vehicle_speed * delta_time * std::cos(prev_theta);
-      ref.y_sequence[i] =
+      reference.y_sequence[i] =
           prev_y + vehicle_speed * delta_time * std::sin(prev_theta);
-      ref.theta_sequence[i] = prev_theta + curve_yaw_rate * delta_time;
+      reference.theta_sequence[i] = prev_theta + curve_yaw_rate * delta_time;
 
-      if (ref.theta_sequence[i] > yaw_ref) {
-        ref.theta_sequence[i] = yaw_ref;
+      if (reference.theta_sequence[i] > yaw_reference) {
+        reference.theta_sequence[i] = yaw_reference;
       }
 
-      ref.r_sequence[i] = curve_yaw_rate;
-      ref.V_sequence[i] = vehicle_speed;
-
+      reference.r_sequence[i] = curve_yaw_rate;
+      reference.V_sequence[i] = vehicle_speed;
     } else {
-      float prev_theta = (i > 0) ? ref.theta_sequence[i - 1] : 0.0F;
-      float prev_x = (i > 0) ? ref.x_sequence[i - 1] : 0.0F;
-      float prev_y = (i > 0) ? ref.y_sequence[i - 1] : 0.0F;
-
-      ref.x_sequence[i] =
+      float prev_theta = (i > 0) ? reference.theta_sequence[i - 1] : 0.0F;
+      float prev_x = (i > 0) ? reference.x_sequence[i - 1] : 0.0F;
+      float prev_y = (i > 0) ? reference.y_sequence[i - 1] : 0.0F;
+      reference.x_sequence[i] =
           prev_x + vehicle_speed * delta_time * std::cos(prev_theta);
-      ref.y_sequence[i] =
+      reference.y_sequence[i] =
           prev_y + vehicle_speed * delta_time * std::sin(prev_theta);
-      ref.theta_sequence[i] = prev_theta;
+      reference.theta_sequence[i] = prev_theta;
 
-      ref.r_sequence[i] = 0.0F;
-      ref.V_sequence[i] = vehicle_speed;
+      reference.r_sequence[i] = 0.0F;
+      reference.V_sequence[i] = vehicle_speed;
     }
   }
 
-  return ref;
+  return reference;
 }
 
 Python_Adaptive_MPC_Tester::Python_Adaptive_MPC_Tester() {
@@ -115,7 +113,7 @@ void Python_Adaptive_MPC_Tester::test_mpc(void) {
   StateSpaceInput_Type<float, INPUT_SIZE> U;
   StateSpaceOutput_Type<float, OUTPUT_SIZE> Y;
 
-  ada_mpc_namespace::Ref_Type ref;
+  ada_mpc_namespace::Reference_Type reference;
   ReferenceSequence reference_sequence =
       create_reference(time, DELTA_TIME, SIMULATION_TIME);
 
@@ -138,15 +136,14 @@ void Python_Adaptive_MPC_Tester::test_mpc(void) {
     Y = measurement_function::function(X, parameters);
 
     /* controller */
-    ref(0, 0) = reference_sequence.x_sequence[sim_step];
-    ref(1, 0) = reference_sequence.y_sequence[sim_step];
-    ref(2, 0) = reference_sequence.theta_sequence[sim_step];
-    ref(3, 0) = reference_sequence.r_sequence[sim_step];
-    ref(4, 0) = reference_sequence.V_sequence[sim_step];
-
+    reference(0, 0) = reference_sequence.x_sequence[sim_step];
+    reference(1, 0) = reference_sequence.y_sequence[sim_step];
+    reference(2, 0) = reference_sequence.theta_sequence[sim_step];
+    reference(3, 0) = reference_sequence.r_sequence[sim_step];
+    reference(4, 0) = reference_sequence.V_sequence[sim_step];
     time_start[sim_step] = micros(); // start measuring.
 
-    U = this->_mpc.update_manipulation(ref, Y);
+    U = this->_mpc.update_manipulation(reference, Y);
 
     time_end[sim_step] = micros(); // end measuring.
 
