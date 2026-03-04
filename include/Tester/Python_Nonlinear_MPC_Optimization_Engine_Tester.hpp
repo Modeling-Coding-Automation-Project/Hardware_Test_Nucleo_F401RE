@@ -14,7 +14,9 @@
 #include <stdint.h>
 
 #include <Arduino.h>
+
 #include <memory>
+#include <tuple>
 
 #ifdef NP
 #undef NP
