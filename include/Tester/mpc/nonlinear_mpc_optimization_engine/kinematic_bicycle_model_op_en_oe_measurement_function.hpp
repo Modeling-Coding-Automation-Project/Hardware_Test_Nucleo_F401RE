@@ -7,34 +7,36 @@ namespace kinematic_bicycle_model_op_en_oe_measurement_function {
 
 using namespace PythonMath;
 
-template <typename X_Type, typename U_Type, typename Parameter_Type, typename Y_Type>
+template <typename X_Type, typename U_Type, typename Parameter_Type,
+          typename Y_Type>
 class Function {
 public:
-static inline auto sympy_function(const double q3, const double px, const double py, const double q0) -> Y_Type {
+  static inline auto sympy_function(const float q3, const float px,
+                                    const float py, const float q0) -> Y_Type {
 
     Y_Type result;
 
-    result.template set<0, 0>(static_cast<double>(px));
-    result.template set<1, 0>(static_cast<double>(py));
-    result.template set<2, 0>(static_cast<double>(q0));
-    result.template set<3, 0>(static_cast<double>(q3));
-    
+    result.template set<0, 0>(static_cast<float>(px));
+    result.template set<1, 0>(static_cast<float>(py));
+    result.template set<2, 0>(static_cast<float>(q0));
+    result.template set<3, 0>(static_cast<float>(q3));
+
     return result;
-}
+  }
 
-static inline auto function(const X_Type X, const U_Type U, const Parameter_Type Parameters) -> Y_Type {
+  static inline auto function(const X_Type X, const U_Type U,
+                              const Parameter_Type Parameters) -> Y_Type {
 
-    double px = X.template get<0, 0>();
+    float px = X.template get<0, 0>();
 
-    double py = X.template get<1, 0>();
+    float py = X.template get<1, 0>();
 
-    double q0 = X.template get<2, 0>();
+    float q0 = X.template get<2, 0>();
 
-    double q3 = X.template get<3, 0>();
+    float q3 = X.template get<3, 0>();
 
     return sympy_function(q3, px, py, q0);
-}
-
+  }
 };
 
 } // namespace kinematic_bicycle_model_op_en_oe_measurement_function

@@ -7,17 +7,12 @@ namespace kinematic_bicycle_model_op_en_nonlinear_mpc_ekf_C {
 
 using namespace PythonNumpy;
 
-using type = DiagMatrix_Type<double, 4>;
+using type = DiagMatrix_Type<float, 4>;
 
 inline auto make(void) -> type {
 
-  return make_DiagMatrix<4>(
-    static_cast<double>(1.0),
-    static_cast<double>(1.0),
-    static_cast<double>(1.0),
-    static_cast<double>(1.0)
-  );
-
+  return make_DiagMatrix<4>(static_cast<float>(1.0), static_cast<float>(1.0),
+                            static_cast<float>(1.0), static_cast<float>(1.0));
 }
 
 } // namespace kinematic_bicycle_model_op_en_nonlinear_mpc_ekf_C

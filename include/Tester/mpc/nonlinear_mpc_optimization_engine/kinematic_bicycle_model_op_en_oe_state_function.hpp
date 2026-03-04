@@ -10,47 +10,51 @@ using namespace PythonMath;
 template <typename X_Type, typename U_Type, typename Parameter_Type>
 class Function {
 public:
-static inline auto sympy_function(const double v, const double px, const double q0, const double delta_time, const double delta, const double wheel_base, const double q3, const double py) -> X_Type {
+  static inline auto sympy_function(const float v, const float px,
+                                    const float q0, const float delta_time,
+                                    const float delta, const float wheel_base,
+                                    const float q3, const float py) -> X_Type {
 
     X_Type result;
 
-    double x0 = delta_time * v;
+    float x0 = delta_time * v;
 
-    double x1 = x0 * tan(delta) / (2 * wheel_base);
+    float x1 = x0 * tan(delta) / (2 * wheel_base);
 
-    double x2 = cos(x1);
+    float x2 = cos(x1);
 
-    double x3 = sin(x1);
+    float x3 = sin(x1);
 
-    result.template set<0, 0>(static_cast<double>(px + x0 * (2 * (q0 * q0) - 1)));
-    result.template set<1, 0>(static_cast<double>(py + 2 * q0 * q3 * x0));
-    result.template set<2, 0>(static_cast<double>(q0 * x2 - q3 * x3));
-    result.template set<3, 0>(static_cast<double>(q0 * x3 + q3 * x2));
-    
+    result.template set<0, 0>(
+        static_cast<float>(px + x0 * (2 * (q0 * q0) - 1)));
+    result.template set<1, 0>(static_cast<float>(py + 2 * q0 * q3 * x0));
+    result.template set<2, 0>(static_cast<float>(q0 * x2 - q3 * x3));
+    result.template set<3, 0>(static_cast<float>(q0 * x3 + q3 * x2));
+
     return result;
-}
+  }
 
-static inline auto function(const X_Type X, const U_Type U, const Parameter_Type Parameters) -> X_Type {
+  static inline auto function(const X_Type X, const U_Type U,
+                              const Parameter_Type Parameters) -> X_Type {
 
-    double px = X.template get<0, 0>();
+    float px = X.template get<0, 0>();
 
-    double py = X.template get<1, 0>();
+    float py = X.template get<1, 0>();
 
-    double q0 = X.template get<2, 0>();
+    float q0 = X.template get<2, 0>();
 
-    double q3 = X.template get<3, 0>();
+    float q3 = X.template get<3, 0>();
 
-    double v = U.template get<0, 0>();
+    float v = U.template get<0, 0>();
 
-    double delta = U.template get<1, 0>();
+    float delta = U.template get<1, 0>();
 
-    double delta_time = Parameters.delta_time;
+    float delta_time = Parameters.delta_time;
 
-    double wheel_base = Parameters.wheel_base;
+    float wheel_base = Parameters.wheel_base;
 
     return sympy_function(v, px, q0, delta_time, delta, wheel_base, q3, py);
-}
-
+  }
 };
 
 } // namespace kinematic_bicycle_model_op_en_oe_state_function

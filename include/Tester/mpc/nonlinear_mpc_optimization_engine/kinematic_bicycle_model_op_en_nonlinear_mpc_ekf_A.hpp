@@ -7,29 +7,21 @@ namespace kinematic_bicycle_model_op_en_nonlinear_mpc_ekf_A {
 
 using namespace PythonNumpy;
 
-using SparseAvailable_nonlinear_mpc_ekf_A = SparseAvailable<
-    ColumnAvailable<true, false, true, false>,
-    ColumnAvailable<false, true, true, true>,
-    ColumnAvailable<false, false, true, true>,
-    ColumnAvailable<false, false, true, true>
->;
+using SparseAvailable_nonlinear_mpc_ekf_A =
+    SparseAvailable<ColumnAvailable<true, false, true, false>,
+                    ColumnAvailable<false, true, true, true>,
+                    ColumnAvailable<false, false, true, true>,
+                    ColumnAvailable<false, false, true, true>>;
 
-using type = SparseMatrix_Type<double, SparseAvailable_nonlinear_mpc_ekf_A>;
+using type = SparseMatrix_Type<float, SparseAvailable_nonlinear_mpc_ekf_A>;
 
 inline auto make(void) -> type {
 
   return make_SparseMatrix<SparseAvailable_nonlinear_mpc_ekf_A>(
-    static_cast<double>(1.0),
-    static_cast<double>(1.0),
-    static_cast<double>(1.0),
-    static_cast<double>(1.0),
-    static_cast<double>(1.0),
-    static_cast<double>(1.0),
-    static_cast<double>(1.0),
-    static_cast<double>(1.0),
-    static_cast<double>(1.0)
-  );
-
+      static_cast<float>(1.0), static_cast<float>(1.0), static_cast<float>(1.0),
+      static_cast<float>(1.0), static_cast<float>(1.0), static_cast<float>(1.0),
+      static_cast<float>(1.0), static_cast<float>(1.0),
+      static_cast<float>(1.0));
 }
 
 } // namespace kinematic_bicycle_model_op_en_nonlinear_mpc_ekf_A

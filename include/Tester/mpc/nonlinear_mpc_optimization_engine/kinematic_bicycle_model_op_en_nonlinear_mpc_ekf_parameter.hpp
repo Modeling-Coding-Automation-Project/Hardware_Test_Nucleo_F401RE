@@ -5,8 +5,8 @@ namespace kinematic_bicycle_model_op_en_nonlinear_mpc_ekf_parameter {
 
 class Parameter {
 public:
-  double wheel_base = static_cast<double>(2.8);
-  double delta_time = static_cast<double>(0.1);
+  float wheel_base = static_cast<float>(2.8);
+  float delta_time = static_cast<float>(0.1);
 };
 
 using Parameter_Type = Parameter;
