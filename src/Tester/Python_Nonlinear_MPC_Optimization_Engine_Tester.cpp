@@ -6,7 +6,7 @@ Python_Nonlinear_MPC_Optimization_Engine_Tester::
   this->_mpc =
       std::make_unique<Tester_MPC_Type>(nonlinear_mpc_namespace::make());
 
-  this->_mpc->set_solver_max_iteration(10, 5);
+  this->_mpc->set_solver_max_iteration(10, 15);
 }
 
 Python_Nonlinear_MPC_Optimization_Engine_Tester::
