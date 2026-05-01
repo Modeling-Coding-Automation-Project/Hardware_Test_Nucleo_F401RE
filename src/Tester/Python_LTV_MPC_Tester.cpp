@@ -78,7 +78,7 @@ void Python_LTV_MPC_Tester::test_mpc(void) {
   bool MPC_updated = false;
 
   /* Initialize reference */
-  for (std::size_t i = 0; i < reference.rows(); ++i) {
+  for (std::size_t i = 0; i < reference.cols(); ++i) {
     reference(0, i) = 1.0F;
   }
 
@@ -89,7 +89,7 @@ void Python_LTV_MPC_Tester::test_mpc(void) {
       MPC_StateSpace_Updater::update(plant_parameters, sys);
       parameter_changed = true;
 
-      for (std::size_t i = 0; i < reference.rows(); ++i) {
+      for (std::size_t i = 0; i < reference.cols(); ++i) {
         reference(0, i) = -1.0;
       }
     }
@@ -103,7 +103,7 @@ void Python_LTV_MPC_Tester::test_mpc(void) {
 
       MPC_updated = true;
 
-      for (std::size_t i = 0; i < reference.rows(); ++i) {
+      for (std::size_t i = 0; i < reference.cols(); ++i) {
         reference(0, i) = 1.0;
       }
 

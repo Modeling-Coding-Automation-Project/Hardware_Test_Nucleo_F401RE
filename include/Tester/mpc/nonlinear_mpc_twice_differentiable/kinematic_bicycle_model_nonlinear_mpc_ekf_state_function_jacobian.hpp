@@ -17,7 +17,7 @@ using Parameter_Type =
 using namespace PythonMath;
 
 using A_Type = kinematic_bicycle_model_ekf_A::type;
-using X_Type = StateSpaceState_Type<float, A_Type::COLS>;
+using X_Type = StateSpaceState_Type<float, A_Type::ROWS>;
 using U_Type = StateSpaceInput_Type<float, 2>;
 
 inline auto sympy_function(const float q0, const float v, const float delta,

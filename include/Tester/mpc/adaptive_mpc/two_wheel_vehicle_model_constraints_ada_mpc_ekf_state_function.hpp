@@ -16,7 +16,7 @@ using namespace PythonMath;
 namespace two_wheel_vehicle_model_constraints_ada_mpc_ekf_state_function {
 
 using A_Type = two_wheel_vehicle_model_constraints_ekf_A::type;
-using X_Type = StateSpaceState_Type<float, A_Type::COLS>;
+using X_Type = StateSpaceState_Type<float, A_Type::ROWS>;
 using U_Type = StateSpaceInput_Type<float, 2>;
 
 inline auto sympy_function(const float px, const float V, const float K_r,

@@ -17,8 +17,8 @@ namespace two_wheel_vehicle_model_constraints_ada_mpc_ekf_measurement_function_j
 
 using A_Type = two_wheel_vehicle_model_constraints_ekf_A::type;
 using C_Type = two_wheel_vehicle_model_constraints_ekf_C::type;
-using X_Type = StateSpaceState_Type<float, A_Type::COLS>;
-using Y_Type = StateSpaceOutput_Type<float, C_Type::COLS>;
+using X_Type = StateSpaceState_Type<float, A_Type::ROWS>;
+using Y_Type = StateSpaceOutput_Type<float, C_Type::ROWS>;
 
 inline auto sympy_function() -> C_Type {
 

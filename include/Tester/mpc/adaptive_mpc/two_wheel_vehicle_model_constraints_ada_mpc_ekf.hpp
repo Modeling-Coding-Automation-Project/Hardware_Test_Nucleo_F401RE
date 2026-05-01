@@ -22,9 +22,9 @@ using A_Type = two_wheel_vehicle_model_constraints_ekf_A::type;
 
 using C_Type = two_wheel_vehicle_model_constraints_ekf_C::type;
 
-constexpr std::size_t STATE_SIZE = A_Type::COLS;
+constexpr std::size_t STATE_SIZE = A_Type::ROWS;
 constexpr std::size_t INPUT_SIZE = 2;
-constexpr std::size_t OUTPUT_SIZE = C_Type::COLS;
+constexpr std::size_t OUTPUT_SIZE = C_Type::ROWS;
 
 using X_Type = StateSpaceState_Type<float, STATE_SIZE>;
 using U_Type = StateSpaceInput_Type<float, INPUT_SIZE>;
