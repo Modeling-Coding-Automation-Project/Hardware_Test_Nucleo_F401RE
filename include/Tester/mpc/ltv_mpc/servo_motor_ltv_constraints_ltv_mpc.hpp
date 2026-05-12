@@ -1,5 +1,5 @@
-#ifndef __SERVO_MOTOR_LTV_CONSTRAINTS_LTV_MPC_HPP__
-#define __SERVO_MOTOR_LTV_CONSTRAINTS_LTV_MPC_HPP__
+#ifndef SERVO_MOTOR_LTV_CONSTRAINTS_LTV_MPC_HPP_
+#define SERVO_MOTOR_LTV_CONSTRAINTS_LTV_MPC_HPP_
 
 #include "servo_motor_ltv_constraints_ltv_mpc_F.hpp"
 #include "servo_motor_ltv_constraints_ltv_mpc_Phi.hpp"
@@ -149,4 +149,4 @@ inline auto make() -> type {
 
 } // namespace servo_motor_ltv_constraints_ltv_mpc
 
-#endif // __SERVO_MOTOR_LTV_CONSTRAINTS_LTV_MPC_HPP__
+#endif // SERVO_MOTOR_LTV_CONSTRAINTS_LTV_MPC_HPP_

@@ -1,5 +1,5 @@
-#ifndef __PYTHON_LTV_MPC_TESTER_HPP__
-#define __PYTHON_LTV_MPC_TESTER_HPP__
+#ifndef PYTHON_LTV_MPC_TESTER_HPP_
+#define PYTHON_LTV_MPC_TESTER_HPP_
 
 #include "python_mpc.hpp"
 #include "servo_motor_ltv_constraints_ltv_mpc.hpp"
@@ -61,4 +61,4 @@ private:
   Tester_MPC_Type _mpc;
 };
 
-#endif // __PYTHON_LTV_MPC_TESTER_HPP__
+#endif // PYTHON_LTV_MPC_TESTER_HPP_

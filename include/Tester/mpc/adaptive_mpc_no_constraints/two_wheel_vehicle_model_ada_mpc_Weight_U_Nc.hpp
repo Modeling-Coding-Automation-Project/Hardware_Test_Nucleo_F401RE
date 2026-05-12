@@ -1,5 +1,5 @@
-#ifndef __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_WEIGHT_U_NC_HPP__
-#define __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_WEIGHT_U_NC_HPP__
+#ifndef TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_WEIGHT_U_NC_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_WEIGHT_U_NC_HPP_
 
 #include "python_numpy.hpp"
 
@@ -16,4 +16,4 @@ inline auto make(void) -> type {
 
 } // namespace two_wheel_vehicle_model_ada_mpc_Weight_U_Nc
 
-#endif // __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_WEIGHT_U_NC_HPP__
+#endif // TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_WEIGHT_U_NC_HPP_

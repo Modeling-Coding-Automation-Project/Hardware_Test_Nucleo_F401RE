@@ -1,5 +1,5 @@
-#ifndef __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_JACOBIAN_HPP__
-#define __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_JACOBIAN_HPP__
+#ifndef TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_JACOBIAN_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_JACOBIAN_HPP_
 
 #include "python_control.hpp"
 #include "two_wheel_vehicle_model_ada_mpc_ekf_parameter.hpp"
@@ -66,4 +66,4 @@ inline auto function(const X_Type X, const Parameter_Type Parameters)
 
 } // namespace two_wheel_vehicle_model_ada_mpc_ekf_measurement_function_jacobian
 
-#endif // __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_JACOBIAN_HPP__
+#endif // TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_JACOBIAN_HPP_

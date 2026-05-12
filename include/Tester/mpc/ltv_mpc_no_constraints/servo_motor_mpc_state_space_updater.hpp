@@ -1,5 +1,5 @@
-#ifndef __SERVO_MOTOR_MPC_STATE_SPACE_UPDATER_HPP__
-#define __SERVO_MOTOR_MPC_STATE_SPACE_UPDATER_HPP__
+#ifndef SERVO_MOTOR_MPC_STATE_SPACE_UPDATER_HPP_
+#define SERVO_MOTOR_MPC_STATE_SPACE_UPDATER_HPP_
 
 namespace servo_motor_mpc_state_space_updater {
 
@@ -163,4 +163,4 @@ public:
 
 } // namespace servo_motor_mpc_state_space_updater
 
-#endif // __SERVO_MOTOR_MPC_STATE_SPACE_UPDATER_HPP__
+#endif // SERVO_MOTOR_MPC_STATE_SPACE_UPDATER_HPP_

@@ -1,5 +1,5 @@
-#ifndef __TWO_WHEEL_VEHICLE_MODEL_ADAPTIVE_MPC_PHI_F_UPDATER_HPP__
-#define __TWO_WHEEL_VEHICLE_MODEL_ADAPTIVE_MPC_PHI_F_UPDATER_HPP__
+#ifndef TWO_WHEEL_VEHICLE_MODEL_ADAPTIVE_MPC_PHI_F_UPDATER_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_ADAPTIVE_MPC_PHI_F_UPDATER_HPP_
 
 #include "two_wheel_vehicle_model_mpc_embedded_integrator_state_space_updater.hpp"
 #include "two_wheel_vehicle_model_prediction_matrices_phi_f_updater.hpp"
@@ -27,4 +27,4 @@ public:
 
 } // namespace two_wheel_vehicle_model_adaptive_mpc_phi_f_updater
 
-#endif // __TWO_WHEEL_VEHICLE_MODEL_ADAPTIVE_MPC_PHI_F_UPDATER_HPP__
+#endif // TWO_WHEEL_VEHICLE_MODEL_ADAPTIVE_MPC_PHI_F_UPDATER_HPP_

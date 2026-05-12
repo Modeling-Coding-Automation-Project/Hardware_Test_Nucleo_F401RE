@@ -1,5 +1,5 @@
-#ifndef __TWO_WHEEL_VEHICLE_MODEL_EKF_A_HPP__
-#define __TWO_WHEEL_VEHICLE_MODEL_EKF_A_HPP__
+#ifndef TWO_WHEEL_VEHICLE_MODEL_EKF_A_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_EKF_A_HPP_
 
 #include "python_numpy.hpp"
 
@@ -30,4 +30,4 @@ inline auto make(void) -> type {
 
 } // namespace two_wheel_vehicle_model_ekf_A
 
-#endif // __TWO_WHEEL_VEHICLE_MODEL_EKF_A_HPP__
+#endif // TWO_WHEEL_VEHICLE_MODEL_EKF_A_HPP_

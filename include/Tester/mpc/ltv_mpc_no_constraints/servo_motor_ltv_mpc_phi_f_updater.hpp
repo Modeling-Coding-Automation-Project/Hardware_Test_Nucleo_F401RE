@@ -1,5 +1,5 @@
-#ifndef __SERVO_MOTOR_LTV_MPC_PHI_F_UPDATER_HPP__
-#define __SERVO_MOTOR_LTV_MPC_PHI_F_UPDATER_HPP__
+#ifndef SERVO_MOTOR_LTV_MPC_PHI_F_UPDATER_HPP_
+#define SERVO_MOTOR_LTV_MPC_PHI_F_UPDATER_HPP_
 
 #include "servo_motor_mpc_embedded_integrator_state_space_updater.hpp"
 #include "servo_motor_prediction_matrices_phi_f_updater.hpp"
@@ -26,4 +26,4 @@ public:
 
 } // namespace servo_motor_ltv_mpc_phi_f_updater
 
-#endif // __SERVO_MOTOR_LTV_MPC_PHI_F_UPDATER_HPP__
+#endif // SERVO_MOTOR_LTV_MPC_PHI_F_UPDATER_HPP_

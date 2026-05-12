@@ -1,5 +1,5 @@
-#ifndef __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_DELTA_U_MAX_HPP__
-#define __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_DELTA_U_MAX_HPP__
+#ifndef TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_DELTA_U_MAX_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_DELTA_U_MAX_HPP_
 
 #include "python_numpy.hpp"
 
@@ -16,4 +16,4 @@ inline auto make(void) -> type { return make_SparseMatrixEmpty<float, 2, 1>(); }
 
 } // namespace two_wheel_vehicle_model_constraints_delta_U_max
 
-#endif // __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_DELTA_U_MAX_HPP__
+#endif // TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_DELTA_U_MAX_HPP_

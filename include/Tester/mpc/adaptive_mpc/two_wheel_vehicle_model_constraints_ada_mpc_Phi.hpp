@@ -1,5 +1,5 @@
-#ifndef __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_PHI_HPP__
-#define __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_PHI_HPP__
+#ifndef TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_PHI_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_PHI_HPP_
 
 #include "python_numpy.hpp"
 
@@ -130,4 +130,4 @@ inline auto make(void) -> type {
 
 } // namespace two_wheel_vehicle_model_constraints_ada_mpc_Phi
 
-#endif // __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_PHI_HPP__
+#endif // TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_PHI_HPP_

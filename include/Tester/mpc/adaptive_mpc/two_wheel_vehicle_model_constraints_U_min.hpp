@@ -1,5 +1,5 @@
-#ifndef __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_U_MIN_HPP__
-#define __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_U_MIN_HPP__
+#ifndef TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_U_MIN_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_U_MIN_HPP_
 
 #include "python_numpy.hpp"
 
@@ -17,4 +17,4 @@ inline auto make(void) -> type {
 
 } // namespace two_wheel_vehicle_model_constraints_U_min
 
-#endif // __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_U_MIN_HPP__
+#endif // TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_U_MIN_HPP_

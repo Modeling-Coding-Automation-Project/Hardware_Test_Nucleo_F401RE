@@ -1,5 +1,5 @@
-#ifndef __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_PARAMETER_HPP__
-#define __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_PARAMETER_HPP__
+#ifndef TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_PARAMETER_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_PARAMETER_HPP_
 
 namespace two_wheel_vehicle_model_constraints_ada_mpc_ekf_parameter {
 
@@ -17,4 +17,4 @@ using Parameter_Type = Parameter;
 
 } // namespace two_wheel_vehicle_model_constraints_ada_mpc_ekf_parameter
 
-#endif // __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_PARAMETER_HPP__
+#endif // TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_PARAMETER_HPP_

@@ -1,5 +1,5 @@
-#ifndef __SERVO_MOTOR_LTV_CONSTRAINTS_LTV_MPC_F_HPP__
-#define __SERVO_MOTOR_LTV_CONSTRAINTS_LTV_MPC_F_HPP__
+#ifndef SERVO_MOTOR_LTV_CONSTRAINTS_LTV_MPC_F_HPP_
+#define SERVO_MOTOR_LTV_CONSTRAINTS_LTV_MPC_F_HPP_
 
 #include "python_numpy.hpp"
 
@@ -334,4 +334,4 @@ inline auto make(void) -> type {
 
 } // namespace servo_motor_ltv_constraints_ltv_mpc_F
 
-#endif // __SERVO_MOTOR_LTV_CONSTRAINTS_LTV_MPC_F_HPP__
+#endif // SERVO_MOTOR_LTV_CONSTRAINTS_LTV_MPC_F_HPP_

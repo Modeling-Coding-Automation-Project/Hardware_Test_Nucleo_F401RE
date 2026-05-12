@@ -1,5 +1,5 @@
-#ifndef __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_HPP__
-#define __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_HPP__
+#ifndef TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_HPP_
 
 #include "two_wheel_vehicle_model_ada_mpc_ekf_parameter.hpp"
 #include "two_wheel_vehicle_model_ekf_A.hpp"
@@ -53,4 +53,4 @@ inline auto function(const X_Type X, const Parameter_Type Parameters)
 
 } // namespace two_wheel_vehicle_model_ada_mpc_ekf_measurement_function
 
-#endif // __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_HPP__
+#endif // TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_HPP_

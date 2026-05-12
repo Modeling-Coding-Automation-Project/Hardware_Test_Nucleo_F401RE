@@ -1,5 +1,5 @@
-#ifndef __SERVO_MOTOR_LTV_PARAMETERS_HPP__
-#define __SERVO_MOTOR_LTV_PARAMETERS_HPP__
+#ifndef SERVO_MOTOR_LTV_PARAMETERS_HPP_
+#define SERVO_MOTOR_LTV_PARAMETERS_HPP_
 
 namespace servo_motor_ltv_parameters {
 
@@ -21,4 +21,4 @@ using Parameter_Type = Parameter;
 
 } // namespace servo_motor_ltv_parameters
 
-#endif // __SERVO_MOTOR_LTV_PARAMETERS_HPP__
+#endif // SERVO_MOTOR_LTV_PARAMETERS_HPP_

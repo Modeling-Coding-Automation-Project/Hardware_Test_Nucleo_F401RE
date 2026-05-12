@@ -1,5 +1,5 @@
-#ifndef __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_HPP__
-#define __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_HPP__
+#ifndef TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_HPP_
 
 #include "two_wheel_vehicle_model_ada_mpc_ekf_measurement_function.hpp"
 #include "two_wheel_vehicle_model_ada_mpc_ekf_measurement_function_jacobian.hpp"
@@ -90,4 +90,4 @@ inline auto make() -> type {
 
 } // namespace two_wheel_vehicle_model_ada_mpc_ekf
 
-#endif // __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_HPP__
+#endif // TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_HPP_
