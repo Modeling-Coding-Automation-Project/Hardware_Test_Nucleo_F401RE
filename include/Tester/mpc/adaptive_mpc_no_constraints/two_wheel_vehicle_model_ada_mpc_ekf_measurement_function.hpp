@@ -1,5 +1,5 @@
-#ifndef TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_HPP_
-#define TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_HPP_
+#ifndef TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_EQUATION_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_EQUATION_HPP_
 
 #include "two_wheel_vehicle_model_ada_mpc_ekf_parameter.hpp"
 #include "two_wheel_vehicle_model_ekf_A.hpp"
@@ -14,7 +14,7 @@ using Parameter_Type =
 
 using namespace PythonMath;
 
-namespace two_wheel_vehicle_model_ada_mpc_ekf_measurement_function {
+namespace two_wheel_vehicle_model_ada_mpc_ekf_measurement_equation {
 
 using A_Type = two_wheel_vehicle_model_ekf_A::type;
 using C_Type = two_wheel_vehicle_model_ekf_C::type;
@@ -51,6 +51,6 @@ inline auto function(const X_Type X, const Parameter_Type Parameters)
   return sympy_function(r, theta, px, V, py);
 }
 
-} // namespace two_wheel_vehicle_model_ada_mpc_ekf_measurement_function
+} // namespace two_wheel_vehicle_model_ada_mpc_ekf_measurement_equation
 
-#endif // TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_FUNCTION_HPP_
+#endif // TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_EQUATION_HPP_

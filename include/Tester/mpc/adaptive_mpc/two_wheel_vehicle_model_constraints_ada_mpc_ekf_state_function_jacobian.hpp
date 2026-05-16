@@ -1,5 +1,5 @@
-#ifndef TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_STATE_FUNCTION_JACOBIAN_HPP_
-#define TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_STATE_FUNCTION_JACOBIAN_HPP_
+#ifndef TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_STATE_EQUATION_JACOBIAN_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_STATE_EQUATION_JACOBIAN_HPP_
 
 #include "two_wheel_vehicle_model_constraints_ada_mpc_ekf_parameter.hpp"
 #include "two_wheel_vehicle_model_constraints_ekf_A.hpp"
@@ -14,7 +14,7 @@ using Parameter_Type =
 
 using namespace PythonMath;
 
-namespace two_wheel_vehicle_model_constraints_ada_mpc_ekf_state_function_jacobian {
+namespace two_wheel_vehicle_model_constraints_ada_mpc_ekf_state_equation_jacobian {
 
 using A_Type = two_wheel_vehicle_model_constraints_ekf_A::type;
 using X_Type = StateSpaceState_Type<float, A_Type::ROWS>;
@@ -142,6 +142,6 @@ inline auto function(const X_Type X, const U_Type U,
 }
 
 } // namespace
-  // two_wheel_vehicle_model_constraints_ada_mpc_ekf_state_function_jacobian
+  // two_wheel_vehicle_model_constraints_ada_mpc_ekf_state_equation_jacobian
 
-#endif // TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_STATE_FUNCTION_JACOBIAN_HPP_
+#endif // TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_STATE_EQUATION_JACOBIAN_HPP_
