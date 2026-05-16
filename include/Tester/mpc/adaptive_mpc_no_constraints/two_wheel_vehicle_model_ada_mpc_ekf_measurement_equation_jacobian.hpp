@@ -1,22 +1,22 @@
-#ifndef TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_MEASUREMENT_FUNCTION_JACOBIAN_HPP_
-#define TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_MEASUREMENT_FUNCTION_JACOBIAN_HPP_
+#ifndef TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_EQUATION_JACOBIAN_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_EQUATION_JACOBIAN_HPP_
 
 #include "python_control.hpp"
-#include "two_wheel_vehicle_model_constraints_ada_mpc_ekf_parameter.hpp"
-#include "two_wheel_vehicle_model_constraints_ekf_A.hpp"
-#include "two_wheel_vehicle_model_constraints_ekf_C.hpp"
+#include "two_wheel_vehicle_model_ada_mpc_ekf_parameter.hpp"
+#include "two_wheel_vehicle_model_ekf_A.hpp"
+#include "two_wheel_vehicle_model_ekf_C.hpp"
 
 using namespace PythonControl;
 
 using Parameter_Type =
-    two_wheel_vehicle_model_constraints_ada_mpc_ekf_parameter::Parameter_Type;
+    two_wheel_vehicle_model_ada_mpc_ekf_parameter::Parameter_Type;
 
 using namespace PythonMath;
 
-namespace two_wheel_vehicle_model_constraints_ada_mpc_ekf_measurement_function_jacobian {
+namespace two_wheel_vehicle_model_ada_mpc_ekf_measurement_equation_jacobian {
 
-using A_Type = two_wheel_vehicle_model_constraints_ekf_A::type;
-using C_Type = two_wheel_vehicle_model_constraints_ekf_C::type;
+using A_Type = two_wheel_vehicle_model_ekf_A::type;
+using C_Type = two_wheel_vehicle_model_ekf_C::type;
 using X_Type = StateSpaceState_Type<float, A_Type::ROWS>;
 using Y_Type = StateSpaceOutput_Type<float, C_Type::ROWS>;
 
@@ -64,7 +64,6 @@ inline auto function(const X_Type X, const Parameter_Type Parameters)
   return sympy_function();
 }
 
-} // namespace
-  // two_wheel_vehicle_model_constraints_ada_mpc_ekf_measurement_function_jacobian
+} // namespace two_wheel_vehicle_model_ada_mpc_ekf_measurement_equation_jacobian
 
-#endif // TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_MEASUREMENT_FUNCTION_JACOBIAN_HPP_
+#endif // TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_MEASUREMENT_EQUATION_JACOBIAN_HPP_

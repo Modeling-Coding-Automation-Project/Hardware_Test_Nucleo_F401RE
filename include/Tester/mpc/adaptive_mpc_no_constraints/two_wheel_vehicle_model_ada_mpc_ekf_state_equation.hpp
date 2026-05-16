@@ -1,5 +1,5 @@
-#ifndef TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_FUNCTION_HPP_
-#define TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_FUNCTION_HPP_
+#ifndef TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_EQUATION_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_EQUATION_HPP_
 
 #include "two_wheel_vehicle_model_ada_mpc_ekf_parameter.hpp"
 #include "two_wheel_vehicle_model_ekf_A.hpp"
@@ -13,7 +13,7 @@ using Parameter_Type =
 
 using namespace PythonMath;
 
-namespace two_wheel_vehicle_model_ada_mpc_ekf_state_function {
+namespace two_wheel_vehicle_model_ada_mpc_ekf_state_equation {
 
 using A_Type = two_wheel_vehicle_model_ekf_A::type;
 using X_Type = StateSpaceState_Type<float, A_Type::ROWS>;
@@ -88,6 +88,6 @@ inline auto function(const X_Type X, const U_Type U,
                         accel, V);
 }
 
-} // namespace two_wheel_vehicle_model_ada_mpc_ekf_state_function
+} // namespace two_wheel_vehicle_model_ada_mpc_ekf_state_equation
 
-#endif // TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_FUNCTION_HPP_
+#endif // TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_EQUATION_HPP_

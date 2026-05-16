@@ -1,22 +1,22 @@
-#ifndef KINEMATIC_BICYCLE_MODEL_OP_EN_NONLINEAR_MPC_EKF_MEASUREMENT_FUNCTION_JACOBIAN_HPP_
-#define KINEMATIC_BICYCLE_MODEL_OP_EN_NONLINEAR_MPC_EKF_MEASUREMENT_FUNCTION_JACOBIAN_HPP_
+#ifndef KINEMATIC_BICYCLE_MODEL_NONLINEAR_MPC_EKF_MEASUREMENT_EQUATION_JACOBIAN_HPP_
+#define KINEMATIC_BICYCLE_MODEL_NONLINEAR_MPC_EKF_MEASUREMENT_EQUATION_JACOBIAN_HPP_
 
-#include "kinematic_bicycle_model_op_en_nonlinear_mpc_ekf_A.hpp"
-#include "kinematic_bicycle_model_op_en_nonlinear_mpc_ekf_C.hpp"
-#include "kinematic_bicycle_model_op_en_nonlinear_mpc_ekf_parameter.hpp"
+#include "kinematic_bicycle_model_ekf_A.hpp"
+#include "kinematic_bicycle_model_ekf_C.hpp"
+#include "kinematic_bicycle_model_nonlinear_mpc_ekf_parameter.hpp"
 #include "python_control.hpp"
 
-namespace kinematic_bicycle_model_op_en_nonlinear_mpc_ekf_measurement_function_jacobian {
+namespace kinematic_bicycle_model_nonlinear_mpc_ekf_measurement_equation_jacobian {
 
 using namespace PythonControl;
 
 using Parameter_Type =
-    kinematic_bicycle_model_op_en_nonlinear_mpc_ekf_parameter::Parameter_Type;
+    kinematic_bicycle_model_nonlinear_mpc_ekf_parameter::Parameter_Type;
 
 using namespace PythonMath;
 
-using A_Type = kinematic_bicycle_model_op_en_nonlinear_mpc_ekf_A::type;
-using C_Type = kinematic_bicycle_model_op_en_nonlinear_mpc_ekf_C::type;
+using A_Type = kinematic_bicycle_model_ekf_A::type;
+using C_Type = kinematic_bicycle_model_ekf_C::type;
 using X_Type = StateSpaceState_Type<float, A_Type::ROWS>;
 using Y_Type = StateSpaceOutput_Type<float, C_Type::ROWS>;
 
@@ -51,6 +51,6 @@ inline auto function(const X_Type X, const Parameter_Type Parameters)
 }
 
 } // namespace
-  // kinematic_bicycle_model_op_en_nonlinear_mpc_ekf_measurement_function_jacobian
+  // kinematic_bicycle_model_nonlinear_mpc_ekf_measurement_equation_jacobian
 
-#endif // KINEMATIC_BICYCLE_MODEL_OP_EN_NONLINEAR_MPC_EKF_MEASUREMENT_FUNCTION_JACOBIAN_HPP_
+#endif // KINEMATIC_BICYCLE_MODEL_NONLINEAR_MPC_EKF_MEASUREMENT_EQUATION_JACOBIAN_HPP_

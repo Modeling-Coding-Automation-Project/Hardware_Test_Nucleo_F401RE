@@ -24,9 +24,9 @@
 #if ADA_MPC_USE_CONSTRAINTS == 0
 
 namespace ada_mpc_namespace = two_wheel_vehicle_model_ada_mpc;
-namespace state_function = two_wheel_vehicle_model_ada_mpc_ekf_state_function;
-namespace measurement_function =
-    two_wheel_vehicle_model_ada_mpc_ekf_measurement_function;
+namespace state_equation = two_wheel_vehicle_model_ada_mpc_ekf_state_equation;
+namespace measurement_equation =
+    two_wheel_vehicle_model_ada_mpc_ekf_measurement_equation;
 
 using Parameter_Type = two_wheel_vehicle_model_ada_mpc_ekf_parameter::Parameter;
 using Reference_Type = two_wheel_vehicle_model_ada_mpc::Reference_Type;
@@ -35,10 +35,10 @@ using Tester_MPC_Type = two_wheel_vehicle_model_ada_mpc::type;
 #else
 
 namespace ada_mpc_namespace = two_wheel_vehicle_model_constraints_ada_mpc;
-namespace state_function =
-    two_wheel_vehicle_model_constraints_ada_mpc_ekf_state_function;
-namespace measurement_function =
-    two_wheel_vehicle_model_constraints_ada_mpc_ekf_measurement_function;
+namespace state_equation =
+    two_wheel_vehicle_model_constraints_ada_mpc_ekf_state_equation;
+namespace measurement_equation =
+    two_wheel_vehicle_model_constraints_ada_mpc_ekf_measurement_equation;
 
 using Parameter_Type =
     two_wheel_vehicle_model_constraints_ada_mpc_ekf_parameter::Parameter;

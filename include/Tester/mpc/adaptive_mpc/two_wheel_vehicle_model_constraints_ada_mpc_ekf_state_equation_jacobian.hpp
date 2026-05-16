@@ -1,29 +1,29 @@
-#ifndef TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_FUNCTION_JACOBIAN_HPP_
-#define TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_FUNCTION_JACOBIAN_HPP_
+#ifndef TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_STATE_EQUATION_JACOBIAN_HPP_
+#define TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_STATE_EQUATION_JACOBIAN_HPP_
 
-#include "two_wheel_vehicle_model_ada_mpc_ekf_parameter.hpp"
-#include "two_wheel_vehicle_model_ekf_A.hpp"
-#include "two_wheel_vehicle_model_ekf_C.hpp"
+#include "two_wheel_vehicle_model_constraints_ada_mpc_ekf_parameter.hpp"
+#include "two_wheel_vehicle_model_constraints_ekf_A.hpp"
+#include "two_wheel_vehicle_model_constraints_ekf_C.hpp"
 
 #include "python_control.hpp"
 
 using namespace PythonControl;
 
 using Parameter_Type =
-    two_wheel_vehicle_model_ada_mpc_ekf_parameter::Parameter_Type;
+    two_wheel_vehicle_model_constraints_ada_mpc_ekf_parameter::Parameter_Type;
 
 using namespace PythonMath;
 
-namespace two_wheel_vehicle_model_ada_mpc_ekf_state_function_jacobian {
+namespace two_wheel_vehicle_model_constraints_ada_mpc_ekf_state_equation_jacobian {
 
-using A_Type = two_wheel_vehicle_model_ekf_A::type;
+using A_Type = two_wheel_vehicle_model_constraints_ekf_A::type;
 using X_Type = StateSpaceState_Type<float, A_Type::ROWS>;
 using U_Type = StateSpaceInput_Type<float, 2>;
 
-inline auto sympy_function(const float delta, const float r, const float l_f,
-                           const float I, const float K_r, const float K_f,
-                           const float l_r, const float m, const float theta,
-                           const float beta, const float V) -> A_Type {
+inline auto sympy_function(const float V, const float K_r, const float beta,
+                           const float theta, const float r, const float m,
+                           const float delta, const float K_f, const float l_f,
+                           const float I, const float l_r) -> A_Type {
 
   A_Type result;
 
@@ -126,21 +126,22 @@ inline auto function(const X_Type X, const U_Type U,
 
   float delta = U.template get<0, 0>();
 
+  float K_r = Parameters.K_r;
+
+  float m = Parameters.m;
+
+  float K_f = Parameters.K_f;
+
   float l_f = Parameters.l_f;
 
   float I = Parameters.I;
 
-  float K_r = Parameters.K_r;
-
-  float K_f = Parameters.K_f;
-
   float l_r = Parameters.l_r;
 
-  float m = Parameters.m;
-
-  return sympy_function(delta, r, l_f, I, K_r, K_f, l_r, m, theta, beta, V);
+  return sympy_function(V, K_r, beta, theta, r, m, delta, K_f, l_f, I, l_r);
 }
 
-} // namespace two_wheel_vehicle_model_ada_mpc_ekf_state_function_jacobian
+} // namespace
+  // two_wheel_vehicle_model_constraints_ada_mpc_ekf_state_equation_jacobian
 
-#endif // TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_FUNCTION_JACOBIAN_HPP_
+#endif // TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_STATE_EQUATION_JACOBIAN_HPP_
