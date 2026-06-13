@@ -81,15 +81,15 @@ void Python_Nonlinear_MPC_Twice_Differentiable_Tester::test_mpc(void) {
     std::size_t solver_iteration =
         this->_mpc->get_solver_step_iterated_number();
 
-    double yaw = 2.0 * std::atan2(Y(3, 0), Y(2, 0));
+    double yaw = 2.0 * std::atan2(Y(3), Y(2));
 
     /* store result */
-    px_array[sim_step](0, 0) = Y(0, 0);
-    py_array[sim_step](0, 0) = Y(1, 0);
-    yaw_array[sim_step](0, 0) = yaw;
-    v_array[sim_step](0, 0) = U(0, 0);
-    delta_array[sim_step](0, 0) = U(1, 0);
-    iteration[sim_step](0, 0) = solver_iteration;
+    px_array[sim_step](0) = Y(0);
+    py_array[sim_step](0) = Y(1);
+    yaw_array[sim_step](0) = yaw;
+    v_array[sim_step](0) = U(0);
+    delta_array[sim_step](0) = U(1);
+    iteration[sim_step](0) = solver_iteration;
   }
 
   /* send result */
@@ -104,17 +104,17 @@ void Python_Nonlinear_MPC_Twice_Differentiable_Tester::test_mpc(void) {
   result_text += "px, py, yaw, v, delta, iteration, computation_time[us]\n";
 
   for (std::size_t i = 0; i < MAX_STEP; i++) {
-    result_text += String(px_array[i](0, 0), 7);
+    result_text += String(px_array[i](0), 7);
     result_text += ", ";
-    result_text += String(py_array[i](0, 0), 7);
+    result_text += String(py_array[i](0), 7);
     result_text += ", ";
-    result_text += String(yaw_array[i](0, 0), 7);
+    result_text += String(yaw_array[i](0), 7);
     result_text += ", ";
-    result_text += String(v_array[i](0, 0), 7);
+    result_text += String(v_array[i](0), 7);
     result_text += ", ";
-    result_text += String(delta_array[i](0, 0), 7);
+    result_text += String(delta_array[i](0), 7);
     result_text += ", ";
-    result_text += String(iteration[i](0, 0));
+    result_text += String(iteration[i](0));
     result_text += ", ";
     result_text += String(time_end[i] - time_start[i]);
     result_text += "\n";
