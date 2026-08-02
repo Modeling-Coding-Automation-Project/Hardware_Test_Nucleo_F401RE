@@ -12,7 +12,7 @@ using namespace PythonControl;
 using Parameter_Type =
     two_wheel_vehicle_model_constraints_ada_mpc_ekf_parameter::Parameter_Type;
 
-using namespace PythonMath;
+using namespace PythonNumpy;
 
 namespace two_wheel_vehicle_model_constraints_ada_mpc_ekf_measurement_equation {
 
