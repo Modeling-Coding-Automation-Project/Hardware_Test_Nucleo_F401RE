@@ -1,13 +1,13 @@
 #ifndef TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_HPP_
 #define TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_HPP_
 
+#include "two_wheel_vehicle_model_ada_mpc_ekf_A.hpp"
+#include "two_wheel_vehicle_model_ada_mpc_ekf_C.hpp"
 #include "two_wheel_vehicle_model_ada_mpc_ekf_measurement_equation.hpp"
 #include "two_wheel_vehicle_model_ada_mpc_ekf_measurement_equation_jacobian.hpp"
 #include "two_wheel_vehicle_model_ada_mpc_ekf_parameter.hpp"
 #include "two_wheel_vehicle_model_ada_mpc_ekf_state_equation.hpp"
 #include "two_wheel_vehicle_model_ada_mpc_ekf_state_equation_jacobian.hpp"
-#include "two_wheel_vehicle_model_ekf_A.hpp"
-#include "two_wheel_vehicle_model_ekf_C.hpp"
 
 #include "python_control.hpp"
 
@@ -18,9 +18,9 @@ using namespace PythonControl;
 
 constexpr std::size_t NUMBER_OF_DELAY = 0;
 
-using A_Type = two_wheel_vehicle_model_ekf_A::type;
+using A_Type = two_wheel_vehicle_model_ada_mpc_ekf_A::type;
 
-using C_Type = two_wheel_vehicle_model_ekf_C::type;
+using C_Type = two_wheel_vehicle_model_ada_mpc_ekf_C::type;
 
 constexpr std::size_t STATE_SIZE = A_Type::ROWS;
 constexpr std::size_t INPUT_SIZE = 2;

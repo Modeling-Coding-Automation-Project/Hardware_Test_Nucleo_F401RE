@@ -1,84 +1,71 @@
 #ifndef TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_MPC_EMBEDDED_INTEGRATOR_STATE_SPACE_UPDATER_HPP_
 #define TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_MPC_EMBEDDED_INTEGRATOR_STATE_SPACE_UPDATER_HPP_
 
+#include "python_math.hpp"
+#include "python_numpy.hpp"
+
 namespace two_wheel_vehicle_model_constraints_mpc_embedded_integrator_state_space_updater {
+
+using namespace PythonMath;
+using namespace PythonNumpy;
 
 template <typename A_Updater_Output_Type> class A_Updater {
 public:
   static inline auto update(float m, float l_f, float l_r, float I, float K_f,
-                            float K_r, float beta, float px, float theta,
-                            float V, float delta, float accel, float py,
-                            float r) -> A_Updater_Output_Type {
+                            float K_r, float theta, float beta, float px,
+                            float delta, float V, float accel, float r,
+                            float py) -> A_Updater_Output_Type {
     static_cast<void>(px);
     static_cast<void>(accel);
     static_cast<void>(py);
 
-    return A_Updater::sympy_function(V, K_r, beta, theta, r, m, delta, K_f, l_f,
-                                     I, l_r);
+    return A_Updater::sympy_function(K_r, m, beta, r, I, V, l_r, theta, delta,
+                                     K_f, l_f);
   }
 
-  static inline auto sympy_function(float V, float K_r, float beta, float theta,
-                                    float r, float m, float delta, float K_f,
-                                    float l_f, float I, float l_r)
+  static inline auto sympy_function(float K_r, float m, float beta, float r,
+                                    float I, float V, float l_r, float theta,
+                                    float delta, float K_f, float l_f)
       -> A_Updater_Output_Type {
     A_Updater_Output_Type result;
 
-    float x0 = 0.01 * sin(theta);
+    float x0 = 0.01 * PythonMath::sin(theta);
 
     float x1 = -V * x0;
 
-    float x2 = 0.01 * cos(theta);
+    float x2 = 0.01 * PythonMath::cos(theta);
 
     float x3 = V * x2;
 
-    float x4 = K_f * (l_f * l_f);
+    float x4 = 1 / I;
 
-    float x5 = K_r * (l_r * l_r);
+    float x5 = 1 / V;
 
-    float x6 = -x4 - x5;
+    float x6 = K_f * (l_f * l_f);
 
-    float x7 = 1 / V;
+    float x7 = K_r * (l_r * l_r);
 
-    float x8 = 1 / I;
+    float x8 = x4 * x5 * (I * V - 0.02 * x6 - 0.02 * x7);
 
-    float x9 = 0.02 * x8;
+    float x9 = K_f * l_f;
 
-    float x10 = x7 * x9;
+    float x10 = x4 * (K_r * l_r - x9);
 
-    float x11 = K_f * l_f;
+    float x11 = V * V;
 
-    float x12 = V * x11;
+    float x12 = 1 / x11;
 
-    float x13 = K_r * V * l_r - x12;
+    float x13 = r * x12 * x4 * (x6 + x7);
 
-    float x14 = K_r * beta * l_r - beta * x11 + delta * x11;
+    float x14 = 1 / m;
 
-    float x15 = V * V;
+    float x15 = 0.02 * K_f;
 
-    float x16 = 1 / x15;
+    float x16 = 0.02 * K_r;
 
-    float x17 = x16 * (K_f * V * delta * l_f + K_r * V * beta * l_r -
-                       beta * x12 - r * x4 - r * x5);
+    float x17 = V * beta;
 
-    float x18 = 2 * x11;
-
-    float x19 = m * x15;
-
-    float x20 = 1 / m;
-
-    float x21 = 0.01 * x16 * x20;
-
-    float x22 = 2 * V;
-
-    float x23 = K_f * x22;
-
-    float x24 = K_r * x22;
-
-    float x25 = 2 * beta;
-
-    float x26 = 0.0002 * x8;
-
-    float x27 = x26 * x7;
+    float x18 = 0.04 * r;
 
     result.template set<0, 0>(static_cast<float>(1));
     result.template set<0, 1>(static_cast<float>(0));
@@ -116,9 +103,9 @@ public:
     result.template set<3, 0>(static_cast<float>(0));
     result.template set<3, 1>(static_cast<float>(0));
     result.template set<3, 2>(static_cast<float>(0));
-    result.template set<3, 3>(static_cast<float>(x10 * x6 + 1));
-    result.template set<3, 4>(static_cast<float>(x10 * x13));
-    result.template set<3, 5>(static_cast<float>(x10 * x14 - x17 * x9));
+    result.template set<3, 3>(static_cast<float>(x8));
+    result.template set<3, 4>(static_cast<float>(0.02 * x10));
+    result.template set<3, 5>(static_cast<float>(0.02 * x13));
     result.template set<3, 6>(static_cast<float>(0.0));
     result.template set<3, 7>(static_cast<float>(0.0));
     result.template set<3, 8>(static_cast<float>(0.0));
@@ -127,15 +114,15 @@ public:
     result.template set<4, 0>(static_cast<float>(0));
     result.template set<4, 1>(static_cast<float>(0));
     result.template set<4, 2>(static_cast<float>(0));
-    result.template set<4, 3>(
-        static_cast<float>(x21 * (2 * K_r * l_r - x18 - x19)));
-    result.template set<4, 4>(static_cast<float>(x21 * (-x23 - x24) + 1));
-    result.template set<4, 5>(static_cast<float>(
-        x21 * (2 * K_f * delta - K_f * x25 - K_r * x25 - m * r * x22) -
-        0.02 * x20 *
-            (2 * K_f * V * delta + 2 * K_r * l_r * r - beta * x23 - beta * x24 -
-             r * x18 - r * x19) /
-            (V * V * V)));
+    result.template set<4, 3>(static_cast<float>(
+        x12 * x14 * (0.02 * K_r * l_r - 0.01 * m * x11 - 0.02 * x9)));
+    result.template set<4, 4>(
+        static_cast<float>(x14 * x5 * (V * m - x15 - x16)));
+    result.template set<4, 5>(
+        static_cast<float>(1.0 * x14 *
+                           (-K_r * l_r * x18 - V * delta * x15 + x15 * x17 +
+                            x16 * x17 + x18 * x9) /
+                           (V * V * V)));
     result.template set<4, 6>(static_cast<float>(0.0));
     result.template set<4, 7>(static_cast<float>(0.0));
     result.template set<4, 8>(static_cast<float>(0.0));
@@ -188,9 +175,9 @@ public:
     result.template set<9, 0>(static_cast<float>(0));
     result.template set<9, 1>(static_cast<float>(0));
     result.template set<9, 2>(static_cast<float>(0));
-    result.template set<9, 3>(static_cast<float>(x27 * x6 + 0.01));
-    result.template set<9, 4>(static_cast<float>(x13 * x27));
-    result.template set<9, 5>(static_cast<float>(x14 * x27 - x17 * x26));
+    result.template set<9, 3>(static_cast<float>(0.01 * x8));
+    result.template set<9, 4>(static_cast<float>(0.0002 * x10));
+    result.template set<9, 5>(static_cast<float>(0.0002 * x13));
     result.template set<9, 6>(static_cast<float>(0));
     result.template set<9, 7>(static_cast<float>(0));
     result.template set<9, 8>(static_cast<float>(0));
@@ -215,24 +202,24 @@ public:
 template <typename B_Updater_Output_Type> class B_Updater {
 public:
   static inline auto update(float m, float l_f, float l_r, float I, float K_f,
-                            float K_r, float beta, float px, float theta,
-                            float V, float delta, float accel, float py,
-                            float r) -> B_Updater_Output_Type {
+                            float K_r, float theta, float beta, float px,
+                            float delta, float V, float accel, float r,
+                            float py) -> B_Updater_Output_Type {
     static_cast<void>(l_r);
     static_cast<void>(K_r);
+    static_cast<void>(theta);
     static_cast<void>(beta);
     static_cast<void>(px);
-    static_cast<void>(theta);
     static_cast<void>(delta);
     static_cast<void>(accel);
-    static_cast<void>(py);
     static_cast<void>(r);
+    static_cast<void>(py);
 
-    return B_Updater::sympy_function(m, V, l_f, I, K_f);
+    return B_Updater::sympy_function(l_f, I, V, K_f, m);
   }
 
-  static inline auto sympy_function(float m, float V, float l_f, float I,
-                                    float K_f) -> B_Updater_Output_Type {
+  static inline auto sympy_function(float l_f, float I, float V, float K_f,
+                                    float m) -> B_Updater_Output_Type {
     B_Updater_Output_Type result;
 
     float x0 = 0.02 * K_f;
@@ -269,23 +256,23 @@ public:
 template <typename C_Updater_Output_Type> class C_Updater {
 public:
   static inline auto update(float m, float l_f, float l_r, float I, float K_f,
-                            float K_r, float beta, float px, float theta,
-                            float V, float delta, float accel, float py,
-                            float r) -> C_Updater_Output_Type {
+                            float K_r, float theta, float beta, float px,
+                            float delta, float V, float accel, float r,
+                            float py) -> C_Updater_Output_Type {
     static_cast<void>(m);
     static_cast<void>(l_f);
     static_cast<void>(l_r);
     static_cast<void>(I);
     static_cast<void>(K_f);
     static_cast<void>(K_r);
+    static_cast<void>(theta);
     static_cast<void>(beta);
     static_cast<void>(px);
-    static_cast<void>(theta);
-    static_cast<void>(V);
     static_cast<void>(delta);
+    static_cast<void>(V);
     static_cast<void>(accel);
-    static_cast<void>(py);
     static_cast<void>(r);
+    static_cast<void>(py);
 
     return C_Updater::sympy_function();
   }
@@ -377,18 +364,18 @@ public:
 
     auto A =
         A_Updater<typename EmbeddedIntegrator_Updater_Output_Type::A_Type>::
-            update(m, l_f, l_r, I, K_f, K_r, beta, px, theta, V, delta, accel,
-                   py, r);
+            update(m, l_f, l_r, I, K_f, K_r, theta, beta, px, delta, V, accel,
+                   r, py);
 
     auto B =
         B_Updater<typename EmbeddedIntegrator_Updater_Output_Type::B_Type>::
-            update(m, l_f, l_r, I, K_f, K_r, beta, px, theta, V, delta, accel,
-                   py, r);
+            update(m, l_f, l_r, I, K_f, K_r, theta, beta, px, delta, V, accel,
+                   r, py);
 
     auto C =
         C_Updater<typename EmbeddedIntegrator_Updater_Output_Type::C_Type>::
-            update(m, l_f, l_r, I, K_f, K_r, beta, px, theta, V, delta, accel,
-                   py, r);
+            update(m, l_f, l_r, I, K_f, K_r, theta, beta, px, delta, V, accel,
+                   r, py);
 
     output.A = A;
     output.B = B;

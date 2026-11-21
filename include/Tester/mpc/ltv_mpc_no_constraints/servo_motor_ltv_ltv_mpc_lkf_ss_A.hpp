@@ -17,14 +17,21 @@ using type = SparseMatrix_Type<float, SparseAvailable_ltv_mpc_lkf_ss_A>;
 
 inline auto make(void) -> type {
 
-  return make_SparseMatrix<SparseAvailable_ltv_mpc_lkf_ss_A>(
-      static_cast<float>(1.0), static_cast<float>(0.05),
-      static_cast<float>(-2.5603853840856567),
-      static_cast<float>(0.9500002466138069),
-      static_cast<float>(0.12801926920428283), static_cast<float>(1.0),
-      static_cast<float>(0.05), static_cast<float>(6.4009950316892),
-      static_cast<float>(-0.32004975158446064),
-      static_cast<float>(0.4900000000000001));
+  auto result =
+      make_SparseMatrixZeros<float, SparseAvailable_ltv_mpc_lkf_ss_A>();
+
+  result.unsafe_access(0) = static_cast<float>(1.0);
+  result.unsafe_access(1) = static_cast<float>(0.05);
+  result.unsafe_access(2) = static_cast<float>(-2.5603853840856567);
+  result.unsafe_access(3) = static_cast<float>(0.9500002466138069);
+  result.unsafe_access(4) = static_cast<float>(0.12801926920428283);
+  result.unsafe_access(5) = static_cast<float>(1.0);
+  result.unsafe_access(6) = static_cast<float>(0.05);
+  result.unsafe_access(7) = static_cast<float>(6.4009950316892);
+  result.unsafe_access(8) = static_cast<float>(-0.32004975158446064);
+  result.unsafe_access(9) = static_cast<float>(0.4900000000000001);
+
+  return result;
 }
 
 } // namespace servo_motor_ltv_ltv_mpc_lkf_ss_A

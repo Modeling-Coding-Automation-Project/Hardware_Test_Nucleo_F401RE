@@ -1,10 +1,12 @@
-#ifndef TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_EQUATION_HPP_
-#define TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_EQUATION_HPP_
+#ifndef __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_EQUATION_HPP__
+#define __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_EQUATION_HPP__
 
+#include "two_wheel_vehicle_model_ada_mpc_ekf_A.hpp"
 #include "two_wheel_vehicle_model_ada_mpc_ekf_parameter.hpp"
-#include "two_wheel_vehicle_model_ekf_A.hpp"
 
 #include "python_control.hpp"
+
+namespace two_wheel_vehicle_model_ada_mpc_ekf_state_equation {
 
 using namespace PythonControl;
 
@@ -13,17 +15,15 @@ using Parameter_Type =
 
 using namespace PythonNumpy;
 
-namespace two_wheel_vehicle_model_ada_mpc_ekf_state_equation {
-
-using A_Type = two_wheel_vehicle_model_ekf_A::type;
+using A_Type = two_wheel_vehicle_model_ada_mpc_ekf_A::type;
 using X_Type = StateSpaceState_Type<float, A_Type::ROWS>;
 using U_Type = StateSpaceInput_Type<float, 2>;
 
-inline auto sympy_function(const float r, const float delta, const float l_f,
-                           const float px, const float py, const float I,
-                           const float K_r, const float K_f, const float l_r,
-                           const float m, const float theta, const float beta,
-                           const float accel, const float V) -> X_Type {
+inline auto sympy_function(const float K_r, const float beta, const float I,
+                           const float accel, const float l_r, const float l_f,
+                           const float V, const float K_f, const float py,
+                           const float theta, const float delta, const float px,
+                           const float r, const float m) -> X_Type {
 
   X_Type result;
 
@@ -72,22 +72,22 @@ inline auto function(const X_Type X, const U_Type U,
 
   float accel = U.template get<1, 0>();
 
-  float l_f = Parameters.l_f;
+  float K_r = Parameters.K_r;
 
   float I = Parameters.I;
 
-  float K_r = Parameters.K_r;
+  float l_r = Parameters.l_r;
+
+  float l_f = Parameters.l_f;
 
   float K_f = Parameters.K_f;
 
-  float l_r = Parameters.l_r;
-
   float m = Parameters.m;
 
-  return sympy_function(r, delta, l_f, px, py, I, K_r, K_f, l_r, m, theta, beta,
-                        accel, V);
+  return sympy_function(K_r, beta, I, accel, l_r, l_f, V, K_f, py, theta, delta,
+                        px, r, m);
 }
 
 } // namespace two_wheel_vehicle_model_ada_mpc_ekf_state_equation
 
-#endif // TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_EQUATION_HPP_
+#endif // __TWO_WHEEL_VEHICLE_MODEL_ADA_MPC_EKF_STATE_EQUATION_HPP__

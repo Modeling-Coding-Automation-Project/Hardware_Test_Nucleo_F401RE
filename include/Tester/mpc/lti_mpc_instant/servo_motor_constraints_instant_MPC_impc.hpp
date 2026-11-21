@@ -17,7 +17,6 @@
 #include "servo_motor_constraints_instant_MPC_impc_w_unc_map.hpp"
 #include "servo_motor_constraints_instant_MPC_impc_w_unc_traj_map.hpp"
 
-
 #include "python_mpc.hpp"
 
 namespace servo_motor_constraints_instant_MPC_impc {

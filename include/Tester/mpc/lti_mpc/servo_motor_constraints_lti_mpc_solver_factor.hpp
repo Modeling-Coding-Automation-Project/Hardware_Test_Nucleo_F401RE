@@ -12,142 +12,94 @@ using SparseAvailable_lti_mpc_solver_factor = SparseAvailable<
                     true, true, true, true, true, true, true, true, true, true,
                     true, true, true, true, true, true, true, true, true, true,
                     true, true, true, true, true, true, true, true, true, true,
-                    true, true, true, true, true, true, true, true, true, true,
-                    true, true, true, true, true, true, true, true, true, true,
-                    true, true, true, true, true>,
+                    true>,
     ColumnAvailable<false, false, false, true, false, true, true, true, true,
                     true, true, true, true, true, true, true, true, true, true,
                     true, true, true, true, true, true, true, true, true, true,
                     true, true, true, true, true, true, true, true, true, true,
-                    true, true, true, true, true, true, true, true, true, true,
-                    true, true, true, true, true, true, true, true, true, true,
-                    true, true, true, true, true>>;
+                    true>>;
 
 using type = SparseMatrix_Type<float, SparseAvailable_lti_mpc_solver_factor>;
 
 inline auto make(void) -> type {
 
-  return make_SparseMatrix<SparseAvailable_lti_mpc_solver_factor>(
-      static_cast<float>(-0.4819182231281409),
-      static_cast<float>(-0.9367773532558108),
-      static_cast<float>(0.009638316923487763),
-      static_cast<float>(-1.3089708186923497),
-      static_cast<float>(0.03753017503396765),
-      static_cast<float>(-1.5467688655845333),
-      static_cast<float>(0.09020673436717712),
-      static_cast<float>(-1.6113623916535227),
-      static_cast<float>(0.1711847034543602),
-      static_cast<float>(-1.4838600662028159),
-      static_cast<float>(0.28034088293685433),
-      static_cast<float>(-1.1695955514468044),
-      static_cast<float>(0.41371633531254914),
-      static_cast<float>(-0.6992110793737555),
-      static_cast<float>(0.5638148436152588),
-      static_cast<float>(-0.12627609258149566),
-      static_cast<float>(0.72039261613263),
-      static_cast<float>(0.4784034058257138),
-      static_cast<float>(0.871667048033432),
-      static_cast<float>(1.0352005413333332),
-      static_cast<float>(1.0058097747213972),
-      static_cast<float>(1.4658328448053766),
-      static_cast<float>(1.1125414894476444),
-      static_cast<float>(1.7040098703306985),
-      static_cast<float>(1.184620132460834),
-      static_cast<float>(1.7051527798830088),
-      static_cast<float>(1.219014831785283),
-      static_cast<float>(1.4538117399251818),
-      static_cast<float>(1.2175869172337443),
-      static_cast<float>(0.9676301226689378),
-      static_cast<float>(1.1871543066711545),
-      static_cast<float>(0.29709697233088345),
-      static_cast<float>(1.138890812130593),
-      static_cast<float>(-0.4791508452989197),
-      static_cast<float>(1.0870985702752838),
-      static_cast<float>(-1.2631297996424475),
-      static_cast<float>(1.047478897379951),
-      static_cast<float>(-1.9494906894053834),
-      static_cast<float>(1.0351026697493757),
-      static_cast<float>(-2.439267067442256),
-      static_cast<float>(1.06233487192776),
-      static_cast<float>(-2.6536489180149507),
-      static_cast<float>(1.136990571439133),
-      static_cast<float>(-2.5459235864961607),
-      static_cast<float>(1.2609862209757765),
-      static_cast<float>(-2.10985352757474),
-      static_cast<float>(1.4297003392005883),
-      static_cast<float>(-1.3831298693459437),
-      static_cast<float>(1.6321756555452804),
-      static_cast<float>(-0.4451178127187358),
-      static_cast<float>(1.8521897169532957),
-      static_cast<float>(0.591170014721432),
-      static_cast<float>(2.0701054418949125),
-      static_cast<float>(1.5921609464722979),
-      static_cast<float>(2.26530209235232),
-      static_cast<float>(2.420429939585461),
-      static_cast<float>(2.4188958965551515),
-      static_cast<float>(2.9530053202542192),
-      static_cast<float>(2.51640168839906),
-      static_cast<float>(3.0989041880719417),
-      static_cast<float>(0.26319902233326015),
-      static_cast<float>(0.13722802837664885),
-      static_cast<float>(-0.005263954483260051),
-      static_cast<float>(-0.21734265914213655),
-      static_cast<float>(-0.013009259571123333),
-      static_cast<float>(-0.6812841323499502),
-      static_cast<float>(-0.016020469571730117),
-      static_cast<float>(-1.1550576330722853),
-      static_cast<float>(-0.005255504373542903),
-      static_cast<float>(-1.5528918109862873),
-      static_cast<float>(0.028072253939705624),
-      static_cast<float>(-1.8047186417445416),
-      static_cast<float>(0.09079131559027827),
-      static_cast<float>(-1.8612698693177017),
-      static_cast<float>(0.18646863443318584),
-      static_cast<float>(-1.6993260125097414),
-      static_cast<float>(0.3145873247097107),
-      static_cast<float>(-1.3251307105356576),
-      static_cast<float>(0.47028646468753904),
-      static_cast<float>(-0.7747333415876821),
-      static_cast<float>(0.6447031695565352),
-      static_cast<float>(-0.11067971316066003),
-      static_cast<float>(0.8258936726034272),
-      static_cast<float>(0.5849093942951402),
-      static_cast<float>(1.000238278527209),
-      static_cast<float>(1.2202578893053526),
-      static_cast<float>(1.1541675669633795),
-      static_cast<float>(1.7057510535578777),
-      static_cast<float>(1.2759953915256994),
-      static_cast<float>(1.9661990280189847),
-      static_cast<float>(1.3576170020978742),
-      static_cast<float>(1.9519318274331643),
-      static_cast<float>(1.3958337656668072),
-      static_cast<float>(1.6471584558160608),
-      static_cast<float>(1.3931012564827474),
-      static_cast<float>(1.0742880425598993),
-      static_cast<float>(1.3575623654525018),
-      static_cast<float>(0.2933706085964108),
-      static_cast<float>(1.302314755331895),
-      static_cast<float>(-0.6035811180888783),
-      static_cast<float>(1.2439621288602636),
-      static_cast<float>(-1.5029520685472713),
-      static_cast<float>(1.2005986821428527),
-      static_cast<float>(-2.2834704694774324),
-      static_cast<float>(1.189462290178742),
-      static_cast<float>(-2.8320871072296643),
-      static_cast<float>(1.2245518992018576),
-      static_cast<float>(-3.0597689988616685),
-      static_cast<float>(1.3145284991992805),
-      static_cast<float>(-2.9150695547329843),
-      static_cast<float>(1.461201369531025),
-      static_cast<float>(-2.393499599413548),
-      static_cast<float>(1.6588417360538354),
-      static_cast<float>(-1.541163101686772),
-      static_cast<float>(1.8944698888716018),
-      static_cast<float>(-0.4517967016225845),
-      static_cast<float>(2.14913980216253),
-      static_cast<float>(0.7428128411960294),
-      static_cast<float>(2.40011217205876),
-      static_cast<float>(1.8881667498292976));
+  auto result =
+      make_SparseMatrixZeros<float, SparseAvailable_lti_mpc_solver_factor>();
+
+  result.unsafe_access(0) = static_cast<float>(-0.6171258210073834);
+  result.unsafe_access(1) = static_cast<float>(-1.3725300408027499);
+  result.unsafe_access(2) = static_cast<float>(0.012342455543448438);
+  result.unsafe_access(3) = static_cast<float>(-2.1068111311062814);
+  result.unsafe_access(4) = static_cast<float>(0.051518256775655996);
+  result.unsafe_access(5) = static_cast<float>(-2.685605387217003);
+  result.unsafe_access(6) = static_cast<float>(0.13087129240218687);
+  result.unsafe_access(7) = static_cast<float>(-3.0034489478952326);
+  result.unsafe_access(8) = static_cast<float>(0.2599685386383381);
+  result.unsafe_access(9) = static_cast<float>(-2.9917674710448092);
+  result.unsafe_access(10) = static_cast<float>(0.44267963708095814);
+  result.unsafe_access(11) = static_cast<float>(-2.6263725346041955);
+  result.unsafe_access(12) = static_cast<float>(0.6760902799569566);
+  result.unsafe_access(13) = static_cast<float>(-1.9314765844112614);
+  result.unsafe_access(14) = static_cast<float>(0.9503576398636348);
+  result.unsafe_access(15) = static_cast<float>(-0.9784672133802944);
+  result.unsafe_access(16) = static_cast<float>(1.249541040569804);
+  result.unsafe_access(17) = static_cast<float>(0.12123853848139422);
+  result.unsafe_access(18) = static_cast<float>(1.5533345927696185);
+  result.unsafe_access(19) = static_cast<float>(1.228935700983703);
+  result.unsafe_access(20) = static_cast<float>(1.8395137834691395);
+  result.unsafe_access(21) = static_cast<float>(2.1957415037801677);
+  result.unsafe_access(22) = static_cast<float>(2.0868054924187525);
+  result.unsafe_access(23) = static_cast<float>(2.882113278580613);
+  result.unsafe_access(24) = static_cast<float>(2.277818063430901);
+  result.unsafe_access(25) = static_cast<float>(3.177328702450034);
+  result.unsafe_access(26) = static_cast<float>(2.4016380717347374);
+  result.unsafe_access(27) = static_cast<float>(3.0163134148393973);
+  result.unsafe_access(28) = static_cast<float>(2.4557208495393565);
+  result.unsafe_access(29) = static_cast<float>(2.3913818689311666);
+  result.unsafe_access(30) = static_cast<float>(2.44677353104033);
+  result.unsafe_access(31) = static_cast<float>(1.356982624625777);
+  result.unsafe_access(32) = static_cast<float>(2.390446174780213);
+  result.unsafe_access(33) = static_cast<float>(0.026358394407457672);
+  result.unsafe_access(34) = static_cast<float>(2.3097956538097435);
+  result.unsafe_access(35) = static_cast<float>(-1.4399486750232797);
+  result.unsafe_access(36) = static_cast<float>(0.1641132535056351);
+  result.unsafe_access(37) = static_cast<float>(-0.2173428905129945);
+  result.unsafe_access(38) = static_cast<float>(-0.0032822488810750152);
+  result.unsafe_access(39) = static_cast<float>(-0.8897639183998521);
+  result.unsafe_access(40) = static_cast<float>(-0.0020535497571873363);
+  result.unsafe_access(41) = static_cast<float>(-1.659484203605032);
+  result.unsafe_access(42) = static_cast<float>(0.016908905310290292);
+  result.unsafe_access(43) = static_cast<float>(-2.366755564387621);
+  result.unsafe_access(44) = static_cast<float>(0.06811276267221111);
+  result.unsafe_access(45) = static_cast<float>(-2.880354162005417);
+  result.unsafe_access(46) = static_cast<float>(0.16409131761152657);
+  result.unsafe_access(47) = static_cast<float>(-3.1022571451598107);
+  result.unsafe_access(48) = static_cast<float>(0.3128777675795793);
+  result.unsafe_access(49) = static_cast<float>(-2.9754226305369014);
+  result.unsafe_access(50) = static_cast<float>(0.5162697686214406);
+  result.unsafe_access(51) = static_cast<float>(-2.490257187264618);
+  result.unsafe_access(52) = static_cast<float>(0.7690003788691018);
+  result.unsafe_access(53) = static_cast<float>(-1.6869926962540225);
+  result.unsafe_access(54) = static_cast<float>(1.0588994190238072);
+  result.unsafe_access(55) = static_cast<float>(-0.6524585249352265);
+  result.unsafe_access(56) = static_cast<float>(1.3680432661746877);
+  result.unsafe_access(57) = static_cast<float>(0.48915115542905757);
+  result.unsafe_access(58) = static_cast<float>(1.6747791033437591);
+  result.unsafe_access(59) = static_cast<float>(1.5908979572245139);
+  result.unsafe_access(60) = static_cast<float>(1.956395249443658);
+  result.unsafe_access(61) = static_cast<float>(2.5016050294251753);
+  result.unsafe_access(62) = static_cast<float>(2.1921128554794627);
+  result.unsafe_access(63) = static_cast<float>(3.086063216389498);
+  result.unsafe_access(64) = static_cast<float>(2.366012785528325);
+  result.unsafe_access(65) = static_cast<float>(3.2443514343007394);
+  result.unsafe_access(66) = static_cast<float>(2.4694968020593984);
+  result.unsafe_access(67) = static_cast<float>(2.927622041982132);
+  result.unsafe_access(68) = static_cast<float>(2.502919934639234);
+  result.unsafe_access(69) = static_cast<float>(2.1480002824860307);
+  result.unsafe_access(70) = static_cast<float>(2.476119766789847);
+  result.unsafe_access(71) = static_cast<float>(0.9808857657430741);
+
+  return result;
 }
 
 } // namespace servo_motor_constraints_lti_mpc_solver_factor

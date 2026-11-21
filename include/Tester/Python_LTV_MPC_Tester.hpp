@@ -20,7 +20,7 @@
 
 namespace ltv_mpc_namespace = servo_motor_ltv_ltv_mpc;
 using MPC_StateSpace_Updater =
-    servo_motor_mpc_state_space_updater::MPC_StateSpace_Updater;
+    servo_motor_ltv_mpc_state_space_updater::MPC_StateSpace_Updater;
 using Parameter_Type = servo_motor_ltv_parameters::Parameter;
 using Reference_Type = servo_motor_ltv_ltv_mpc::Reference_Type;
 using Tester_MPC_Type = ltv_mpc_namespace::type;

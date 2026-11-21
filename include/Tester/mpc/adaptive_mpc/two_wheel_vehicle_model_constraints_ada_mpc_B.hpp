@@ -17,9 +17,13 @@ using type = SparseMatrix_Type<float, SparseAvailable_ada_mpc_B>;
 
 inline auto make(void) -> type {
 
-  return make_SparseMatrix<SparseAvailable_ada_mpc_B>(static_cast<float>(1.0),
-                                                      static_cast<float>(1.0),
-                                                      static_cast<float>(1.0));
+  auto result = make_SparseMatrixZeros<float, SparseAvailable_ada_mpc_B>();
+
+  result.unsafe_access(0) = static_cast<float>(1.0);
+  result.unsafe_access(1) = static_cast<float>(1.0);
+  result.unsafe_access(2) = static_cast<float>(1.0);
+
+  return result;
 }
 
 } // namespace two_wheel_vehicle_model_constraints_ada_mpc_B

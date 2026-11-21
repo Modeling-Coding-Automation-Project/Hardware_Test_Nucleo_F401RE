@@ -15,8 +15,12 @@ using type = SparseMatrix_Type<float, SparseAvailable_ltv_mpc_lkf_ss_B>;
 
 inline auto make(void) -> type {
 
-  return make_SparseMatrix<SparseAvailable_ltv_mpc_lkf_ss_B>(
-      static_cast<float>(0.04999999999999999));
+  auto result =
+      make_SparseMatrixZeros<float, SparseAvailable_ltv_mpc_lkf_ss_B>();
+
+  result.unsafe_access(0) = static_cast<float>(0.04999999999999999);
+
+  return result;
 }
 
 } // namespace servo_motor_ltv_constraints_ltv_mpc_lkf_ss_B

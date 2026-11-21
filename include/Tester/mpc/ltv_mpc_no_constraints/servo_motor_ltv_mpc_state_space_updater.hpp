@@ -1,7 +1,7 @@
-#ifndef SERVO_MOTOR_MPC_STATE_SPACE_UPDATER_HPP_
-#define SERVO_MOTOR_MPC_STATE_SPACE_UPDATER_HPP_
+#ifndef SERVO_MOTOR_LTV_MPC_STATE_SPACE_UPDATER_HPP_
+#define SERVO_MOTOR_LTV_MPC_STATE_SPACE_UPDATER_HPP_
 
-namespace servo_motor_mpc_state_space_updater {
+namespace servo_motor_ltv_mpc_state_space_updater {
 
 template <typename A_Updater_Output_Type> class A_Updater {
 public:
@@ -9,14 +9,14 @@ public:
                             float Mmotor, float Rmotor, float Bmotor, float R,
                             float Kt, float Bload) -> A_Updater_Output_Type {
 
-    return A_Updater::sympy_function(Bmotor, Lshaft, R, dshaft, Bload, shaftrho,
-                                     Kt, Mmotor, G, Rmotor);
+    return A_Updater::sympy_function(Rmotor, R, G, dshaft, Kt, Bload, Lshaft,
+                                     Bmotor, Mmotor, shaftrho);
   }
 
-  static inline auto sympy_function(float Bmotor, float Lshaft, float R,
-                                    float dshaft, float Bload, float shaftrho,
-                                    float Kt, float Mmotor, float G,
-                                    float Rmotor) -> A_Updater_Output_Type {
+  static inline auto sympy_function(float Rmotor, float R, float G,
+                                    float dshaft, float Kt, float Bload,
+                                    float Lshaft, float Bmotor, float Mmotor,
+                                    float shaftrho) -> A_Updater_Output_Type {
     A_Updater_Output_Type result;
 
     float x0 = Rmotor * Rmotor;
@@ -74,11 +74,11 @@ public:
     static_cast<void>(Bmotor);
     static_cast<void>(Bload);
 
-    return B_Updater::sympy_function(Mmotor, R, Rmotor, Kt);
+    return B_Updater::sympy_function(R, Kt, Rmotor, Mmotor);
   }
 
-  static inline auto sympy_function(float Mmotor, float R, float Rmotor,
-                                    float Kt) -> B_Updater_Output_Type {
+  static inline auto sympy_function(float R, float Kt, float Rmotor,
+                                    float Mmotor) -> B_Updater_Output_Type {
     B_Updater_Output_Type result;
 
     result.template set<0, 0>(static_cast<float>(0));
@@ -104,10 +104,10 @@ public:
     static_cast<void>(Kt);
     static_cast<void>(Bload);
 
-    return C_Updater::sympy_function(Lshaft, dshaft, G);
+    return C_Updater::sympy_function(dshaft, Lshaft, G);
   }
 
-  static inline auto sympy_function(float Lshaft, float dshaft, float G)
+  static inline auto sympy_function(float dshaft, float Lshaft, float G)
       -> C_Updater_Output_Type {
     C_Updater_Output_Type result;
 
@@ -161,6 +161,6 @@ public:
   }
 };
 
-} // namespace servo_motor_mpc_state_space_updater
+} // namespace servo_motor_ltv_mpc_state_space_updater
 
-#endif // SERVO_MOTOR_MPC_STATE_SPACE_UPDATER_HPP_
+#endif // SERVO_MOTOR_LTV_MPC_STATE_SPACE_UPDATER_HPP_

@@ -11,7 +11,12 @@ using type = DiagMatrix_Type<float, 2>;
 
 inline auto make(void) -> type {
 
-  return make_DiagMatrix<2>(static_cast<float>(0.1), static_cast<float>(0.1));
+  auto result = make_DiagMatrixZeros<float, 2>();
+
+  result.unsafe_access(0) = static_cast<float>(0.1);
+  result.unsafe_access(1) = static_cast<float>(0.1);
+
+  return result;
 }
 
 } // namespace two_wheel_vehicle_model_constraints_ada_mpc_Weight_U_Nc

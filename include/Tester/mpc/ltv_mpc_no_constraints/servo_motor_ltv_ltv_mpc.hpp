@@ -5,10 +5,10 @@
 #include "servo_motor_ltv_ltv_mpc_Phi.hpp"
 #include "servo_motor_ltv_ltv_mpc_Weight_U_Nc.hpp"
 #include "servo_motor_ltv_ltv_mpc_lkf.hpp"
+#include "servo_motor_ltv_ltv_mpc_phi_f_updater.hpp"
 #include "servo_motor_ltv_ltv_mpc_solver_factor.hpp"
-#include "servo_motor_ltv_mpc_phi_f_updater.hpp"
+#include "servo_motor_ltv_mpc_state_space_updater.hpp"
 #include "servo_motor_ltv_parameters.hpp"
-#include "servo_motor_mpc_state_space_updater.hpp"
 
 #include "python_mpc.hpp"
 
@@ -18,7 +18,7 @@ using namespace PythonNumpy;
 using namespace PythonControl;
 using namespace PythonMPC;
 
-constexpr std::size_t NP = 32;
+constexpr std::size_t NP = 20;
 constexpr std::size_t NC = 2;
 
 constexpr std::size_t INPUT_SIZE = servo_motor_ltv_ltv_mpc_lkf::INPUT_SIZE;
@@ -53,18 +53,18 @@ using Reference_Type = DenseMatrix_Type<float, OUTPUT_SIZE, 1>;
 using ReferenceTrajectory_Type =
     MPC_ReferenceTrajectory_Type<Reference_Type, NP>;
 
-using Parameter_Type = servo_motor_ltv_parameters::Parameter;
+using Parameter_Type = servo_motor_ltv_parameters::Parameter_Type;
 
 using Weight_U_Nc_Type = servo_motor_ltv_ltv_mpc_Weight_U_Nc::type;
 
-using EmbeddedIntegratorSateSpace_Type =
+using EmbeddedIntegratorStateSpace_Type =
     typename EmbeddedIntegratorTypes<A_Type, B_Type, C_Type>::StateSpace_Type;
 
 using type = LTV_MPC_NoConstraints_Type<LKF_Type, PredictionMatrices_Type,
                                         ReferenceTrajectory_Type,
                                         Parameter_Type, SolverFactor_Type>;
 
-inline auto make() -> type {
+inline auto make(void) -> type {
 
   auto kalman_filter = servo_motor_ltv_ltv_mpc_lkf::make();
 
@@ -83,14 +83,15 @@ inline auto make() -> type {
   MPC_StateSpace_Updater_Function_Object<
       Parameter_Type, typename LKF_Type::DiscreteStateSpace_Type>
       MPC_StateSpace_Updater_Function =
-          servo_motor_mpc_state_space_updater::MPC_StateSpace_Updater::update<
-              Parameter_Type, typename LKF_Type::DiscreteStateSpace_Type>;
+          servo_motor_ltv_mpc_state_space_updater::MPC_StateSpace_Updater::
+              update<Parameter_Type,
+                     typename LKF_Type::DiscreteStateSpace_Type>;
 
-  LTV_MPC_Phi_F_Updater_Function_Object<EmbeddedIntegratorSateSpace_Type,
+  LTV_MPC_Phi_F_Updater_Function_Object<EmbeddedIntegratorStateSpace_Type,
                                         Parameter_Type, Phi_Type, F_Type>
       LTV_MPC_Phi_F_Updater_Function =
-          servo_motor_ltv_mpc_phi_f_updater::LTV_MPC_Phi_F_Updater::update<
-              EmbeddedIntegratorSateSpace_Type, Parameter_Type, Phi_Type,
+          servo_motor_ltv_ltv_mpc_phi_f_updater::LTV_MPC_Phi_F_Updater::update<
+              EmbeddedIntegratorStateSpace_Type, Parameter_Type, Phi_Type,
               F_Type>;
 
   auto ltv_mpc_nc = make_LTV_MPC_NoConstraints(

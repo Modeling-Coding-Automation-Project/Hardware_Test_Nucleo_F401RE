@@ -102,7 +102,7 @@ void Python_Adaptive_MPC_Tester::test_mpc(void) {
 
   Parameter_Type parameters;
 
-  StateSpaceState_Type<float, STATE_SIZE> X;
+  PythonControl::StateSpaceState_Type<float, STATE_SIZE> X;
   X.template set<0, 0>(static_cast<float>(0.0));
   X.template set<1, 0>(static_cast<float>(0.0));
   X.template set<2, 0>(static_cast<float>(0.0));
@@ -110,8 +110,8 @@ void Python_Adaptive_MPC_Tester::test_mpc(void) {
   X.template set<4, 0>(static_cast<float>(0.0));
   X.template set<5, 0>(static_cast<float>(10.0));
 
-  StateSpaceInput_Type<float, INPUT_SIZE> U;
-  StateSpaceOutput_Type<float, OUTPUT_SIZE> Y;
+  PythonControl::StateSpaceInput_Type<float, INPUT_SIZE> U;
+  PythonControl::StateSpaceOutput_Type<float, OUTPUT_SIZE> Y;
 
   ada_mpc_namespace::Reference_Type reference;
   ReferenceSequence reference_sequence =

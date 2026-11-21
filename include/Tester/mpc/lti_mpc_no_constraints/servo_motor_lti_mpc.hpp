@@ -14,7 +14,7 @@ using namespace PythonNumpy;
 using namespace PythonControl;
 using namespace PythonMPC;
 
-constexpr std::size_t NP = 32;
+constexpr std::size_t NP = 20;
 constexpr std::size_t NC = 2;
 
 constexpr std::size_t INPUT_SIZE = servo_motor_lti_mpc_lkf::INPUT_SIZE;
@@ -47,7 +47,7 @@ using type =
     LTI_MPC_NoConstraints_Type<LKF_Type, PredictionMatrices_Type,
                                ReferenceTrajectory_Type, SolverFactor_Type>;
 
-inline auto make() -> type {
+inline auto make(void) -> type {
 
   auto kalman_filter = servo_motor_lti_mpc_lkf::make();
 

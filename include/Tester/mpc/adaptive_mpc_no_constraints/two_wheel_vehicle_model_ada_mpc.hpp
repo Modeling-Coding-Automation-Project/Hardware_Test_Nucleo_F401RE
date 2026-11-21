@@ -73,7 +73,7 @@ using type =
                                    ReferenceTrajectory_Type, Parameter_Type,
                                    SolverFactor_Type>;
 
-inline auto make() -> type {
+inline auto make(void) -> type {
 
   auto kalman_filter = two_wheel_vehicle_model_ada_mpc_ekf::make();
 

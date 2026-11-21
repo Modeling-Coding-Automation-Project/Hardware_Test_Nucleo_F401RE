@@ -10,12 +10,12 @@
 #include "two_wheel_vehicle_model_constraints_ada_mpc_solver_factor.hpp"
 #include "two_wheel_vehicle_model_constraints_adaptive_mpc_phi_f_updater.hpp"
 
-#include "two_wheel_vehicle_model_constraints_U_max.hpp"
-#include "two_wheel_vehicle_model_constraints_U_min.hpp"
-#include "two_wheel_vehicle_model_constraints_Y_max.hpp"
-#include "two_wheel_vehicle_model_constraints_Y_min.hpp"
-#include "two_wheel_vehicle_model_constraints_delta_U_max.hpp"
-#include "two_wheel_vehicle_model_constraints_delta_U_min.hpp"
+#include "two_wheel_vehicle_model_constraints_ada_mpc_U_max.hpp"
+#include "two_wheel_vehicle_model_constraints_ada_mpc_U_min.hpp"
+#include "two_wheel_vehicle_model_constraints_ada_mpc_Y_max.hpp"
+#include "two_wheel_vehicle_model_constraints_ada_mpc_Y_min.hpp"
+#include "two_wheel_vehicle_model_constraints_ada_mpc_delta_U_max.hpp"
+#include "two_wheel_vehicle_model_constraints_ada_mpc_delta_U_min.hpp"
 
 #include "python_mpc.hpp"
 
@@ -59,17 +59,19 @@ using Phi_Type = two_wheel_vehicle_model_constraints_ada_mpc_Phi::type;
 using SolverFactor_Type =
     two_wheel_vehicle_model_constraints_ada_mpc_solver_factor::type;
 
-using Delta_U_Min_Type = two_wheel_vehicle_model_constraints_delta_U_min::type;
+using Delta_U_Min_Type =
+    two_wheel_vehicle_model_constraints_ada_mpc_delta_U_min::type;
 
-using Delta_U_Max_Type = two_wheel_vehicle_model_constraints_delta_U_max::type;
+using Delta_U_Max_Type =
+    two_wheel_vehicle_model_constraints_ada_mpc_delta_U_max::type;
 
-using U_Min_Type = two_wheel_vehicle_model_constraints_U_min::type;
+using U_Min_Type = two_wheel_vehicle_model_constraints_ada_mpc_U_min::type;
 
-using U_Max_Type = two_wheel_vehicle_model_constraints_U_max::type;
+using U_Max_Type = two_wheel_vehicle_model_constraints_ada_mpc_U_max::type;
 
-using Y_Min_Type = two_wheel_vehicle_model_constraints_Y_min::type;
+using Y_Min_Type = two_wheel_vehicle_model_constraints_ada_mpc_Y_min::type;
 
-using Y_Max_Type = two_wheel_vehicle_model_constraints_Y_max::type;
+using Y_Max_Type = two_wheel_vehicle_model_constraints_ada_mpc_Y_max::type;
 
 using PredictionMatrices_Type =
     MPC_PredictionMatrices_Type<F_Type, Phi_Type, NP, NC, INPUT_SIZE,
@@ -95,7 +97,7 @@ using type =
                      Delta_U_Max_Type, U_Min_Type, U_Max_Type, Y_Min_Type,
                      Y_Max_Type, SolverFactor_Type>;
 
-inline auto make() -> type {
+inline auto make(void) -> type {
 
   auto kalman_filter = two_wheel_vehicle_model_constraints_ada_mpc_ekf::make();
 
@@ -113,23 +115,25 @@ inline auto make() -> type {
   auto solver_factor =
       two_wheel_vehicle_model_constraints_ada_mpc_solver_factor::make();
 
-  auto delta_U_min = two_wheel_vehicle_model_constraints_delta_U_min::make();
+  auto delta_U_min =
+      two_wheel_vehicle_model_constraints_ada_mpc_delta_U_min::make();
 
-  auto delta_U_max = two_wheel_vehicle_model_constraints_delta_U_max::make();
+  auto delta_U_max =
+      two_wheel_vehicle_model_constraints_ada_mpc_delta_U_max::make();
 
-  auto U_min = two_wheel_vehicle_model_constraints_U_min::make();
+  auto U_min = two_wheel_vehicle_model_constraints_ada_mpc_U_min::make();
 
   U_min.template set<0, 0>(static_cast<float>(-1.0));
   U_min.template set<1, 0>(static_cast<float>(-10.0));
 
-  auto U_max = two_wheel_vehicle_model_constraints_U_max::make();
+  auto U_max = two_wheel_vehicle_model_constraints_ada_mpc_U_max::make();
 
   U_max.template set<0, 0>(static_cast<float>(1.0));
   U_max.template set<1, 0>(static_cast<float>(10.0));
 
-  auto Y_min = two_wheel_vehicle_model_constraints_Y_min::make();
+  auto Y_min = two_wheel_vehicle_model_constraints_ada_mpc_Y_min::make();
 
-  auto Y_max = two_wheel_vehicle_model_constraints_Y_max::make();
+  auto Y_max = two_wheel_vehicle_model_constraints_ada_mpc_Y_max::make();
 
   PredictionMatrices_Type prediction_matrices(F, Phi);
 

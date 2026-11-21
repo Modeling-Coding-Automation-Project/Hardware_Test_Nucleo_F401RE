@@ -1,11 +1,13 @@
-#ifndef TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_MEASUREMENT_EQUATION_HPP_
-#define TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_MEASUREMENT_EQUATION_HPP_
+#ifndef __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_MEASUREMENT_EQUATION_HPP__
+#define __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_MEASUREMENT_EQUATION_HPP__
 
+#include "two_wheel_vehicle_model_constraints_ada_mpc_ekf_A.hpp"
+#include "two_wheel_vehicle_model_constraints_ada_mpc_ekf_C.hpp"
 #include "two_wheel_vehicle_model_constraints_ada_mpc_ekf_parameter.hpp"
-#include "two_wheel_vehicle_model_constraints_ekf_A.hpp"
-#include "two_wheel_vehicle_model_constraints_ekf_C.hpp"
 
 #include "python_control.hpp"
+
+namespace two_wheel_vehicle_model_constraints_ada_mpc_ekf_measurement_equation {
 
 using namespace PythonControl;
 
@@ -14,15 +16,13 @@ using Parameter_Type =
 
 using namespace PythonNumpy;
 
-namespace two_wheel_vehicle_model_constraints_ada_mpc_ekf_measurement_equation {
-
-using A_Type = two_wheel_vehicle_model_constraints_ekf_A::type;
-using C_Type = two_wheel_vehicle_model_constraints_ekf_C::type;
+using A_Type = two_wheel_vehicle_model_constraints_ada_mpc_ekf_A::type;
+using C_Type = two_wheel_vehicle_model_constraints_ada_mpc_ekf_C::type;
 using X_Type = StateSpaceState_Type<float, A_Type::ROWS>;
 using Y_Type = StateSpaceOutput_Type<float, C_Type::ROWS>;
 
-inline auto sympy_function(const float px, const float theta, const float V,
-                           const float py, const float r) -> Y_Type {
+inline auto sympy_function(const float theta, const float px, const float V,
+                           const float r, const float py) -> Y_Type {
 
   Y_Type result;
 
@@ -48,10 +48,10 @@ inline auto function(const X_Type X, const Parameter_Type Parameters)
 
   float V = X.template get<5, 0>();
 
-  return sympy_function(px, theta, V, py, r);
+  return sympy_function(theta, px, V, r, py);
 }
 
 } // namespace
   // two_wheel_vehicle_model_constraints_ada_mpc_ekf_measurement_equation
 
-#endif // TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_MEASUREMENT_EQUATION_HPP_
+#endif // __TWO_WHEEL_VEHICLE_MODEL_CONSTRAINTS_ADA_MPC_EKF_MEASUREMENT_EQUATION_HPP__
