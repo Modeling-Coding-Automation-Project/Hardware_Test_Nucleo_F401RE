@@ -98,29 +98,23 @@ void Python_Nonlinear_MPC_Twice_Differentiable_Tester::test_mpc(void) {
   delay(5000);
 
   Serial.println("Result: \n");
-  String result_text;
-  result_text.reserve(256);
-
-  result_text += "px, py, yaw, v, delta, iteration, computation_time[us]\n";
+  Serial.println("px, py, yaw, v, delta, iteration, computation_time[us]");
 
   for (std::size_t i = 0; i < MAX_STEP; i++) {
-    result_text += String(px_array[i](0), 7);
-    result_text += ", ";
-    result_text += String(py_array[i](0), 7);
-    result_text += ", ";
-    result_text += String(yaw_array[i](0), 7);
-    result_text += ", ";
-    result_text += String(v_array[i](0), 7);
-    result_text += ", ";
-    result_text += String(delta_array[i](0), 7);
-    result_text += ", ";
-    result_text += String(iteration[i](0));
-    result_text += ", ";
-    result_text += String(time_end[i] - time_start[i]);
-    result_text += "\n";
+    Serial.print(px_array[i](0), 7);
+    Serial.print(", ");
+    Serial.print(py_array[i](0), 7);
+    Serial.print(", ");
+    Serial.print(yaw_array[i](0), 7);
+    Serial.print(", ");
+    Serial.print(v_array[i](0), 7);
+    Serial.print(", ");
+    Serial.print(delta_array[i](0), 7);
+    Serial.print(", ");
+    Serial.print(iteration[i](0));
+    Serial.print(", ");
+    Serial.println(time_end[i] - time_start[i]);
   }
 
-  result_text += "\n";
-
-  Serial.println(result_text);
+  Serial.println();
 }

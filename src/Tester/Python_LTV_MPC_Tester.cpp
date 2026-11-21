@@ -128,23 +128,17 @@ void Python_LTV_MPC_Tester::test_mpc(void) {
   delay(5000);
 
   Serial.println("Result: \n");
-  String result_text;
-  result_text.reserve(256);
-
-  result_text += "Y[0], Y[1], U[0], Calculation time[us]\n";
+  Serial.println("Y[0], Y[1], U[0], Calculation time[us]");
 
   for (std::size_t i = 0; i < Python_LTV_MPC_Tester::SIM_STEP_MAX; i++) {
-    result_text += String(y_array[i](0), 7);
-    result_text += ", ";
-    result_text += String(y_array[i](1), 7);
-    result_text += ", ";
-    result_text += String(u_array[i](0), 7);
-    result_text += ", ";
-    result_text += String(time_end[i] - time_start[i]);
-    result_text += "\n";
+    Serial.print(y_array[i](0), 7);
+    Serial.print(", ");
+    Serial.print(y_array[i](1), 7);
+    Serial.print(", ");
+    Serial.print(u_array[i](0), 7);
+    Serial.print(", ");
+    Serial.println(time_end[i] - time_start[i]);
   }
 
-  result_text += "\n";
-
-  Serial.println(result_text);
+  Serial.println();
 }

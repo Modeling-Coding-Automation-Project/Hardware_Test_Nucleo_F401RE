@@ -61,11 +61,11 @@ void Python_LTI_MPC_Instant_Tester::test_mpc(void) {
       u_array;
 
   for (std::size_t sim_step = 0;
-       sim_step < Python_LTI_MPC_Instant_Tester::SIM_STEP_MAX;
-       ++sim_step) {
+       sim_step < Python_LTI_MPC_Instant_Tester::SIM_STEP_MAX; ++sim_step) {
     /* system response */
     sys.update(U);
-    // Measure the output after advancing the state, as in the Instant MPC sample.
+    // Measure the output after advancing the state, as in the Instant MPC
+    // sample.
     const auto y_measured = sys.output_equation(sys.get_X(), U);
 
     /* controller */
@@ -91,23 +91,18 @@ void Python_LTI_MPC_Instant_Tester::test_mpc(void) {
   delay(5000);
 
   Serial.println("Result: \n");
-  String result_text;
-  result_text.reserve(256);
+  Serial.println("Y[0], Y[1], U[0], Calculation time[us]");
 
-  result_text += "Y[0], Y[1], U[0], Calculation time[us]\n";
-
-  for (std::size_t i = 0; i < Python_LTI_MPC_Instant_Tester::SIM_STEP_MAX; i++) {
-    result_text += String(y_array[i](0), 7);
-    result_text += ", ";
-    result_text += String(y_array[i](1), 7);
-    result_text += ", ";
-    result_text += String(u_array[i](0), 7);
-    result_text += ", ";
-    result_text += String(time_end[i] - time_start[i]);
-    result_text += "\n";
+  for (std::size_t i = 0; i < Python_LTI_MPC_Instant_Tester::SIM_STEP_MAX;
+       i++) {
+    Serial.print(y_array[i](0), 7);
+    Serial.print(", ");
+    Serial.print(y_array[i](1), 7);
+    Serial.print(", ");
+    Serial.print(u_array[i](0), 7);
+    Serial.print(", ");
+    Serial.println(time_end[i] - time_start[i]);
   }
 
-  result_text += "\n";
-
-  Serial.println(result_text);
+  Serial.println();
 }
