@@ -8,6 +8,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        environment:
+        - nucleo_f401re
+        - lti_mpc
+        - lti_mpc_instant
+        - ltv_mpc
+        - nonlinear_mpc_twice_differentiable
+        - nonlinear_mpc_optimization_engine
 
     steps:
     - name: Checkout code
@@ -17,13 +27,9 @@ jobs:
     - name: Cache PlatformIO
       uses: actions/cache@v6
       with:
-        path: '~/.platformio
-
-          '
+        path: ~/.platformio
         key: ${{ runner.os }}-platformio-${{ hashFiles('platformio.ini') }}
-        restore-keys: '${{ runner.os }}-platformio-
-
-          '
+        restore-keys: ${{ runner.os }}-platformio-
     - name: Set up Python
       uses: actions/setup-python@v7
       with:
@@ -31,4 +37,4 @@ jobs:
     - name: Install PlatformIO
       run: pip install platformio
     - name: Build Nucleo F401RE firmware
-      run: pio run -e nucleo_f401re
+      run: pio run -e ${{ matrix.environment }}
